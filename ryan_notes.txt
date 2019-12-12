@@ -1,0 +1,14 @@
+
+#SETUP
+    nvm install -g node@8.11.4 OR nvm use 8.11.4
+    npm install -g gulp@3.9.1 yo@2.0.5 @microsoft/generator-sharepoint@1.5.1
+
+#Need to do a  one-time dev cert activation for workbench support
+    gulp trust-dev-cert
+
+=> ERROR:if no module then jsut install module first as stated in error
+
+#Run Local Bench
+    gulp serve
+
+=> ERROR: SWITCH OFF POSTGRESS because default port conflicts.
