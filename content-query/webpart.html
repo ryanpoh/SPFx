@@ -32,9 +32,10 @@
 </style>
 
 <div class="dynamic-template">
-  <h2>Test Webpart</h2>
+  <h1 class="ui huge dividing header">ADMIN DASHBOARD</h1>
   <div class="dynamic-items">
-    <div class="ui three column grid">
+    <h2 class="ui padded header">Today</h2>
+    <div class="ui five column grid">
       <div class="column">
         <div class="ui card eq-card">
           <div class="image">
@@ -114,8 +115,87 @@
           </div>
         </div>
       </div>
+
+      <div class="column">
+        <div class="ui card eq-card">
+          <div class="image">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA_skfg6bgtLWgrM5ggm_yfxmcMTpb57I84zE3GKTDHCTaGKT2&s"
+            />
+          </div>
+          <div class="content">
+            <a class="header">Predicted Machinery Breakdown</a>
+            <div class="meta">
+              <span class="date"
+                >Number of days until possible breakdown of machine based on
+                previous data.</span
+              >
+            </div>
+            <div class="description">
+              Status: <span style="color: red;"> < 10 Days </span>
+            </div>
+          </div>
+          <div class="extra content">
+            <a>
+              <i class="pallet icon"></i>
+              Stage: <b>Critical</b>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="ui card eq-card">
+          <div class="image">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA_skfg6bgtLWgrM5ggm_yfxmcMTpb57I84zE3GKTDHCTaGKT2&s"
+            />
+          </div>
+          <div class="content">
+            <a class="header">Predicted Machinery Breakdown</a>
+            <div class="meta">
+              <span class="date"
+                >Number of days until possible breakdown of machine based on
+                previous data.</span
+              >
+            </div>
+            <div class="description">
+              Status: <span style="color: red;"> < 10 Days </span>
+            </div>
+          </div>
+          <div class="extra content">
+            <a>
+              <i class="pallet icon"></i>
+              Stage: <b>Critical</b>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div></div>
+
+    <h2 class="ui dividing header">Performance Metrics</h2>
+
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Job</th>
+          <th>GUID</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each items}}
+        <tr>
+          <td data-label="Name">Ryan</td>
+          <td data-label="Sample Number Addition">{{Title.textValue}}</td>
+          <td data-label="Job">Engineer</td>
+          <td data-label="GUID">{{GUID.textValue}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
     <div class="ui grid">
       <div class="eight wide column ">
         <canvas id="lineChart"></canvas>
@@ -124,6 +204,8 @@
         <canvas id="doughnutChart"></canvas>
       </div>
     </div>
+
+    <h1 id="totalArray">yyyy</h1>
 
     {{#each items}}
     <div class="dynamic-item">
@@ -140,9 +222,27 @@
         <span><b>ID : </b>{{ID.textValue}}</span>
         <span><b>Modified : </b>{{Modified.textValue}}</span>
         <span><b>Editor : </b>{{Editor.textValue}}</span>
-        <button>Hello</button>
+        <button id="totalArray"></button>
       </div>
     </div>
     {{/each}}
   </div>
+
+
+  <script>
+    let sumArray = [];
+    let total = [1, 2, 3, 4].reduce((a, b) => a + b, 0).toString();
+    document.getElementById("totalArray").innerHTML = "hello";
+  </script>
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"
+  ></script>
+
+  <script>
+    let sumArray = [];
+    let total = [1, 2, 3, 4].reduce((a, b) => a + b, 0).toString();
+    document.getElementById("totalArray").innerHTML = "hello";
+  </script>
 </div>
