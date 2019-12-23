@@ -222,12 +222,10 @@
         <span><b>ID : </b>{{ID.textValue}}</span>
         <span><b>Modified : </b>{{Modified.textValue}}</span>
         <span><b>Editor : </b>{{Editor.textValue}}</span>
-        <button id="totalArray"></button>
       </div>
     </div>
     {{/each}}
   </div>
-
 
   <script>
     let sumArray = [];
@@ -239,10 +237,4 @@
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"
   ></script>
-
-  <script>
-    let sumArray = [];
-    let total = [1, 2, 3, 4].reduce((a, b) => a + b, 0).toString();
-    document.getElementById("totalArray").innerHTML = "hello";
-  </script>
 </div>
