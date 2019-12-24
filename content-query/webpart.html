@@ -35,12 +35,27 @@
   <h1 class="ui huge dividing header">ADMIN DASHBOARD</h1>
   <div class="dynamic-items">
     <h2 class="ui padded header">Today</h2>
+
+    <div class="ui teal message">
+      <i class="close icon"></i>
+      <div class="header">
+        Welcome back! Here is what you missed while you were away:
+      </div>
+      <ul class="list">
+        <li>Electricity costings were higher compared to previous quarter.</li>
+        <li>
+          An accident almost occured in department 2 which could affect your
+          DWI.
+        </li>
+      </ul>
+    </div>
+
     <div class="ui five column grid">
       <div class="column">
         <div class="ui card eq-card">
           <div class="image">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA_skfg6bgtLWgrM5ggm_yfxmcMTpb57I84zE3GKTDHCTaGKT2&s"
+              src="https://c8.alamy.com/comp/T9P1A1/automation-industry-machine-production-robotics-flat-color-icon-vector-T9P1A1.jpg"
             />
           </div>
           <div class="content">
@@ -68,7 +83,7 @@
         <div class="ui card eq-card">
           <div class="image">
             <img
-              src="https://c8.alamy.com/comp/GKWYAX/industrial-security-safety-icon-flat-design-GKWYAX.jpg"
+              src="https://c8.alamy.com/comp/TA2F29/insurance-protection-safety-digital-shield-flat-color-icon-vector-TA2F29.jpg"
             />
           </div>
           <div class="content">
@@ -95,7 +110,7 @@
         <div class="ui card eq-card">
           <div class="image">
             <img
-              src="https://c8.alamy.com/comp/KHEBTB/cat-in-a-cardboard-box-icon-flat-style-KHEBTB.jpg"
+              src="https://c8.alamy.com/comp/T9XE3X/arrange-design-stack-3d-box-flat-color-icon-vector-T9XE3X.jpg"
             />
           </div>
           <div class="content">
@@ -120,25 +135,24 @@
         <div class="ui card eq-card">
           <div class="image">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA_skfg6bgtLWgrM5ggm_yfxmcMTpb57I84zE3GKTDHCTaGKT2&s"
+              src="https://c8.alamy.com/comp/TA3R5M/building-factory-construction-industry-business-logo-template-flat-color-TA3R5M.jpg"
             />
           </div>
           <div class="content">
-            <a class="header">Predicted Machinery Breakdown</a>
+            <a class="header">Downtime This Month</a>
             <div class="meta">
               <span class="date"
-                >Number of days until possible breakdown of machine based on
-                previous data.</span
+                >Estimated process downtimes along with projected losses.</span
               >
             </div>
             <div class="description">
-              Status: <span style="color: red;"> < 10 Days </span>
+              Tolerance: <span style="color: orange;"> Acceptable </span>
             </div>
           </div>
           <div class="extra content">
             <a>
               <i class="pallet icon"></i>
-              Stage: <b>Critical</b>
+              Estimated Losses: <b>- RM2100</b>
             </a>
           </div>
         </div>
@@ -148,25 +162,25 @@
         <div class="ui card eq-card">
           <div class="image">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA_skfg6bgtLWgrM5ggm_yfxmcMTpb57I84zE3GKTDHCTaGKT2&s"
+              src="https://c8.alamy.com/comp/T9XBWF/label-business-discount-sale-abstract-flat-color-icon-template-T9XBWF.jpg"
             />
           </div>
           <div class="content">
-            <a class="header">Predicted Machinery Breakdown</a>
+            <a class="header">Projected Sales</a>
             <div class="meta">
               <span class="date"
-                >Number of days until possible breakdown of machine based on
-                previous data.</span
+                >Predicted sales volume based on current and historical sales
+                figures.</span
               >
             </div>
             <div class="description">
-              Status: <span style="color: red;"> < 10 Days </span>
+              Status: <span style="color: green;">RM34,413</span>
             </div>
           </div>
           <div class="extra content">
             <a>
               <i class="pallet icon"></i>
-              Stage: <b>Critical</b>
+              Status: <b>On Track</b>
             </a>
           </div>
         </div>
@@ -175,26 +189,110 @@
 
     <h2 class="ui dividing header">Performance Metrics</h2>
 
-    <table class="ui celled table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Job</th>
-          <th>GUID</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each items}}
-        <tr>
-          <td data-label="Name">Ryan</td>
-          <td data-label="Sample Number Addition">{{Title.textValue}}</td>
-          <td data-label="Job">Engineer</td>
-          <td data-label="GUID">{{GUID.textValue}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    <div class="ui grid">
+      <div class="ten wide column">
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th>PID</th>
+              <th>Title</th>
+              <th>Job</th>
+              <th>GUID</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each items}}
+            <tr>
+              <td data-label="PID">DAQ100</td>
+              <td data-label="Title">{{Title.textValue}}</td>
+              <td data-label="Job">Engineer</td>
+              <td data-label="GUID">{{GUID.textValue}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <div class="six wide column">
+        <table class="ui very basic collapsing celled table">
+          <thead>
+            <tr>
+              <th>Direct Reports</th>
+              <th>Years of Service</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h4 class="ui image header">
+                  <img
+                    src="https://semantic-ui.com/images/avatar2/small/lena.png"
+                    class="ui mini rounded image"
+                  />
+                  <div class="content">
+                    Lena
+                    <div class="sub header">Floor Manager</div>
+                  </div>
+                </h4>
+              </td>
+              <td>
+                22
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4 class="ui image header">
+                  <img
+                    src="https://semantic-ui.com/images/avatar2/small/matthew.png"
+                    class="ui mini rounded image"
+                  />
+                  <div class="content">
+                    Matthew
+                    <div class="sub header">Floor Manager</div>
+                  </div>
+                </h4>
+              </td>
+              <td>
+                15
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4 class="ui image header">
+                  <img
+                    src="https://semantic-ui.com/images/avatar2/small/lindsay.png"
+                    class="ui mini rounded image"
+                  />
+                  <div class="content">
+                    Lindsay
+                    <div class="sub header">Floor Manager</div>
+                  </div>
+                </h4>
+              </td>
+              <td>
+                12
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4 class="ui image header">
+                  <img
+                    src="https://semantic-ui.com/images/avatar2/small/mark.png"
+                    class="ui mini rounded image"
+                  />
+                  <div class="content">
+                    Mark
+                    <div class="sub header">Operations Executive</div>
+                  </div>
+                </h4>
+              </td>
+              <td>
+                11
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
     <div class="ui grid">
       <div class="eight wide column ">
@@ -226,15 +324,18 @@
     </div>
     {{/each}}
   </div>
-
-  <script>
-    let sumArray = [];
-    let total = [1, 2, 3, 4].reduce((a, b) => a + b, 0).toString();
-    document.getElementById("totalArray").innerHTML = "hello";
-  </script>
-  <script
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"
-  ></script>
 </div>
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"
+></script>
+<script>
+  // let sumArray = [];
+  // {{#each items}}
+  //    sumArray.push({{Title.textValue}})
+  // {{/each}}
+  // let total = sumArray.reduce((a, b) => a + b, 0).toString();
+  document.getElementById("totalArray").innerHTML = "hello";
+</script>

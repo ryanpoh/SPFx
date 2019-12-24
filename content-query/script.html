@@ -16,7 +16,6 @@
 
     <meta charset="UTF-8" />
     <title>title</title>
-
   </head>
   <body>
     <script>
@@ -46,7 +45,12 @@
         },
 
         // Configuration options go here
-        options: {}
+        options: {
+          title: {
+            display: true,
+            text: "Volume Produced 2019"
+          }
+        }
       });
 
       var ctx2 = document.getElementById("doughnutChart").getContext("2d");
@@ -65,7 +69,12 @@
             }
           ]
         },
-        options: {}
+        options: {
+          title: {
+            display: true,
+            text: "Process Distribution"
+          }
+        }
       });
     </script>
 
