@@ -15,40 +15,44 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
     <meta charset="UTF-8" />
-    <title>title</title>
+    <title>RyanTest</title>
   </head>
   <body>
     <script>
       var ctx = document.getElementById("lineChart").getContext("2d");
       var chart = new Chart(ctx, {
-        // The type of chart we want to create
         type: "line",
-
-        // The data for our dataset
         data: {
-          labels: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July"
-          ],
+          labels: ["Jan", "Feb", "March", "April", "May", "June", "July"],
           datasets: [
             {
+              label: "Faulty (pcs.)",
+              backgroundColor: "rgbA(47,60,126, 0.8)",
+              borderColor: "rgbA(47,60,126, 0.8)",
+              data: [3, 2, 3, 1, 4, 4, 1]
+            },
+            {
+              label: "Quantity (pcs.)",
               backgroundColor: "rgb(255, 99, 132)",
               borderColor: "rgb(255, 99, 132)",
-              data: [0, 10, 5, 2, 20, 30, 45]
+              data: [18, 20, 25, 23, 20, 30, 45]
             }
           ]
         },
-
-        // Configuration options go here
         options: {
           title: {
             display: true,
-            text: "Volume Produced 2019"
+            text: "Production Volume (000' pcs.)",
+            fontSize: 15
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ]
           }
         }
       });
@@ -57,6 +61,7 @@
       var chart2 = new Chart(ctx2, {
         type: "doughnut",
         data: {
+          labels: ["NAQ100", "DAC300", "KUL100", "MAL600"],
           datasets: [
             {
               backgroundColor: [
@@ -72,7 +77,92 @@
         options: {
           title: {
             display: true,
-            text: "Process Distribution"
+            text: "Process Distribution (000')",
+            fontSize: 15
+          }
+        }
+      });
+
+      var ctx3 = document.getElementById("barChart").getContext("2d");
+      var chart3 = new Chart(ctx3, {
+        type: "bar",
+        data: {
+          labels: ["Jan", "Feb", "March", "April", "May", "June", "July"],
+          datasets: [
+            {
+              label: "Total Sales (RM '000)'",
+              data: [12, 19, 11, 17, 15, 13, 18],
+              backgroundColor: [
+                "rgba(54, 162, 235, 0.8)",
+                "rgba(255, 99, 132, 0.8)",
+                "rgba(255, 206, 86, 0.8)",
+                "rgba(75, 192, 192, 0.8)",
+                "rgba(153, 102, 255, 0.8)",
+                "rgba(255, 159, 64, 0.8)",
+                "rgba(39, 174, 96, 0.8)"
+              ],
+              borderColor: [
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 99, 132, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(39, 174, 96, 1)"
+              ],
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: "Monthly Sales 2019",
+            fontSize: 15
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ]
+          }
+        }
+      });
+
+      var restOfPie = 27;
+      var naq = 13;
+      var dac = 10;
+      var kul = 30;
+      var mal = 20;
+
+      var ctx4 = document.getElementById("pieChart").getContext("2d");
+      var chart4 = new Chart(ctx4, {
+        type: "pie",
+        data: {
+          labels: ["In Progress", "NAQ100", "DAC300", "KUL100", "MAL600"],
+          datasets: [
+            {
+              label: "Process Distribution",
+              backgroundColor: [
+                "rgba(134, 136, 138, 0.60)",
+                "rgb(255, 99, 132)",
+                "rgb(54, 162, 235)",
+                "rgb(255, 205, 86)",
+                "rgba(0, 255, 0, 0.4)"
+              ],
+
+              data: [restOfPie, naq, dac, kul, mal]
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: "Process Completion (%)",
+            fontSize: 15
           }
         }
       });

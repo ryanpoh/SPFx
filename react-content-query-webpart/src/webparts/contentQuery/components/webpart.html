@@ -32,7 +32,7 @@
 </style>
 
 <div class="dynamic-template">
-  <h1 class="ui huge dividing header">ADMIN DASHBOARD</h1>
+  <h1 class="ui huge dividing header">SRKK ADMIN DASHBOARD</h1>
   <div class="dynamic-items">
     <h2 class="ui padded header">Today</h2>
 
@@ -44,8 +44,7 @@
       <ul class="list">
         <li>Electricity costings were higher compared to previous quarter.</li>
         <li>
-          An accident almost occured in department 2 which could affect your
-          DWI.
+          An accident almost occured in Section 2B which could affect your DWI.
         </li>
       </ul>
     </div>
@@ -151,8 +150,8 @@
           </div>
           <div class="extra content">
             <a>
-              <i class="pallet icon"></i>
-              Estimated Losses: <b>- RM2100</b>
+              <i class="arrow circle down icon"></i>
+              Est. Losses: <b>- RM2100</b>
             </a>
           </div>
         </div>
@@ -179,7 +178,7 @@
           </div>
           <div class="extra content">
             <a>
-              <i class="pallet icon"></i>
+              <i class="dollar sign icon"></i>
               Status: <b>On Track</b>
             </a>
           </div>
@@ -195,17 +194,17 @@
           <thead>
             <tr>
               <th>PID</th>
-              <th>Title</th>
-              <th>Job</th>
+              <th>Employee ID</th>
+              <th>Department</th>
               <th>GUID</th>
             </tr>
           </thead>
           <tbody>
             {{#each items}}
             <tr>
-              <td data-label="PID">DAQ100</td>
-              <td data-label="Title">{{Title.textValue}}</td>
-              <td data-label="Job">Engineer</td>
+              <td data-label="PID">{{pid.textValue}}</td>
+              <td data-label="Employee ID">{{pic.textValue}}</td>
+              <td data-label="Department">{{department.textValue}}</td>
               <td data-label="GUID">{{GUID.textValue}}</td>
             </tr>
             {{/each}}
@@ -281,7 +280,7 @@
                   />
                   <div class="content">
                     Mark
-                    <div class="sub header">Operations Executive</div>
+                    <div class="sub header">Operations Exec</div>
                   </div>
                 </h4>
               </td>
@@ -303,9 +302,14 @@
       </div>
     </div>
 
-    <h1 id="totalArray">yyyy</h1>
+    <div class="ui grid">
+      <div class="eight wide column "><canvas id="barChart"></canvas>;</div>
+      <div class="eight wide column ">
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
 
-    {{#each items}}
+    <!-- {{#each items}}
     <div class="dynamic-item">
       <h3>Result #{{@index}}</h3>
       <div class="dynamic-item-fields">
@@ -322,7 +326,7 @@
         <span><b>Editor : </b>{{Editor.textValue}}</span>
       </div>
     </div>
-    {{/each}}
+    {{/each}} -->
   </div>
 </div>
 
