@@ -49,8 +49,10 @@
       </ul>
     </div>
 
-    <div class="ui five column grid">
-      <div class="column">
+    <div class="ui grid center aligned">
+      <div
+        class="eight wide mobile three wide tablet three wide computer column"
+      >
         <div class="ui card eq-card">
           <div class="image">
             <img
@@ -58,7 +60,8 @@
             />
           </div>
           <div class="content">
-            <a class="header">Predicted Machinery Breakdown</a>
+            <a class="header">Predicted Downtime</a>
+            <br>
             <div class="meta">
               <span class="date"
                 >Number of days until possible breakdown of machine based on
@@ -78,7 +81,9 @@
         </div>
       </div>
 
-      <div class="column">
+      <div
+        class="eight wide mobile three wide tablet three wide computer column"
+      >
         <div class="ui card eq-card">
           <div class="image">
             <img
@@ -86,7 +91,8 @@
             />
           </div>
           <div class="content">
-            <a class="header">Days Without Injury (DWI)</a>
+            <a class="header">Days Without Injury</a>
+            <br>
             <div class="meta">
               <span class="date"
                 >Number of days without an accident in the factory.</span
@@ -105,7 +111,9 @@
         </div>
       </div>
 
-      <div class="column">
+      <div
+        class="eight wide mobile three wide tablet three wide computer column"
+      >
         <div class="ui card eq-card">
           <div class="image">
             <img
@@ -114,6 +122,7 @@
           </div>
           <div class="content">
             <a class="header">Volume Today</a>
+            <br>
             <div class="meta">
               <span class="date">Volume of products products today.</span>
             </div>
@@ -130,7 +139,9 @@
         </div>
       </div>
 
-      <div class="column">
+      <div
+        class="eight wide mobile three wide tablet three wide computer column"
+      >
         <div class="ui card eq-card">
           <div class="image">
             <img
@@ -138,7 +149,8 @@
             />
           </div>
           <div class="content">
-            <a class="header">Downtime This Month</a>
+            <a class="header">Downtime Today</a>
+            <br>
             <div class="meta">
               <span class="date"
                 >Estimated process downtimes along with projected losses.</span
@@ -157,7 +169,9 @@
         </div>
       </div>
 
-      <div class="column">
+      <div
+        class="eight wide mobile three wide tablet three wide computer column"
+      >
         <div class="ui card eq-card">
           <div class="image">
             <img
@@ -166,6 +180,7 @@
           </div>
           <div class="content">
             <a class="header">Projected Sales</a>
+            <br>
             <div class="meta">
               <span class="date"
                 >Predicted sales volume based on current and historical sales
@@ -189,7 +204,7 @@
     <h2 class="ui dividing header">Performance Metrics</h2>
 
     <div class="ui grid">
-      <div class="ten wide column">
+      <div class="sixteen wide mobile ten wide tablet ten wide computer column">
         <table class="ui celled table">
           <thead>
             <tr>
@@ -211,7 +226,7 @@
           </tbody>
         </table>
       </div>
-      <div class="six wide column">
+      <div class="sixteen wide mobile six wide tablet six wide computer column">
         <table class="ui very basic collapsing celled table">
           <thead>
             <tr>
@@ -294,17 +309,19 @@
     </div>
 
     <div class="ui grid">
-      <div class="eight wide column ">
+      <div class="sixteen wide mobile eight wide tablet eight wide computer column">
         <canvas id="lineChart"></canvas>
       </div>
-      <div class="eight wide column ">
+      <div class="sixteen wide mobile eight wide tablet eight wide computer column">
         <canvas id="doughnutChart"></canvas>
       </div>
     </div>
 
     <div class="ui grid">
-      <div class="eight wide column "><canvas id="barChart"></canvas>;</div>
-      <div class="eight wide column ">
+      <div class="sixteen wide mobile eight wide tablet eight wide computer column">
+        <canvas id="barChart"></canvas>
+      </div>
+      <div class="sixteen wide mobile eight wide tablet eight wide computer column">
         <canvas id="pieChart"></canvas>
       </div>
     </div>
