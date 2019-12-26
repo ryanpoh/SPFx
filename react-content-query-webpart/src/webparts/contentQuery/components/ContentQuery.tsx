@@ -121,7 +121,7 @@ export default class ContentQuery extends React.Component<IContentQueryProps, IC
             // Resets the onGoingAsyncCalls
             this.onGoingAsyncCalls = []; 
 
-            // Process the handlebars template
+            // Process the handlebars templatekk
             this.processTemplate(templateContent, templateContext);
           }
         })
