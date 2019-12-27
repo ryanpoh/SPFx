@@ -10,20 +10,17 @@ const build = require('@microsoft/sp-build-web');
  * https://github.com/helpers/handlebars-helpers/issues/263
  ********************************************************************************************/
 build.configureWebpack.mergeConfig({
-  additionalConfiguration: (generatedConfiguration) => {
+	additionalConfiguration : (generatedConfiguration) => {
+		generatedConfiguration.resolve.alias = { handlebars: 'handlebars/dist/handlebars.min.js' };
 
-    generatedConfiguration.resolve.alias = { handlebars: 'handlebars/dist/handlebars.min.js' };
+		generatedConfiguration.module.rules.push({ test: /\.js$/, loader: 'unlazy-loader' });
 
-    generatedConfiguration.module.rules.push(
-      { test: /\.js$/, loader: 'unlazy-loader' }
-    );
+		generatedConfiguration.node = {
+			fs : 'empty'
+		};
 
-    generatedConfiguration.node = {
-      fs: 'empty'
-    }
-    
-    return generatedConfiguration;
-  }
+		return generatedConfiguration;
+	}
 });
 
 build.initialize(gulp);
