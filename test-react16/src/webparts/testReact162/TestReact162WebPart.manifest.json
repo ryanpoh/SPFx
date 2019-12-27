@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "5edaeb06-5a5b-465a-9aeb-71bc0f6936f7",
-  "alias": "React16WebPart",
+  "id": "12b8ad56-3237-4b9e-a1b6-7840cbc07f88",
+  "alias": "TestReact162WebPart",
   "componentType": "WebPart",
 
   // The "*" signifies that the version should be taken from the package.json
@@ -17,11 +17,11 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "React16" },
-    "description": { "default": "Using latest and greatest versions available." },
+    "title": { "default": "test-react-16-2" },
+    "description": { "default": "test-react-16-2 description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "React16"
+      "description": "test-react-16-2"
     }
   }]
 }

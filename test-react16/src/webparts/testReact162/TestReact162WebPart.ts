@@ -7,19 +7,19 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-webpart-base';
 
-import * as strings from 'React16WebPartStrings';
-import React16 from './components/React16';
-import { IReact16Props } from './components/IReact16Props';
+import * as strings from 'TestReact162WebPartStrings';
+import TestReact162 from './components/TestReact162';
+import { ITestReact162Props } from './components/ITestReact162Props';
 
-export interface IReact16WebPartProps {
+export interface ITestReact162WebPartProps {
   description: string;
 }
 
-export default class React16WebPart extends BaseClientSideWebPart<IReact16WebPartProps> {
+export default class TestReact162WebPart extends BaseClientSideWebPart<ITestReact162WebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IReact16Props > = React.createElement(
-      React16,
+    const element: React.ReactElement<ITestReact162Props > = React.createElement(
+      TestReact162,
       {
         description: this.properties.description
       }

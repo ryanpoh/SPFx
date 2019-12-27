@@ -4,6 +4,23 @@
     npm install -g gulp@3.9.1 yo@2.0.5 @microsoft/generator-sharepoint@1.5.1
 
 
+/**************************
+
+REACT 16c(Node 10.15.3)
+    ╰─ sudo  npm install -g gulp  yo  @microsoft/generator-sharepoint
+
+
+╰─ npm list -g --depth 0                                                       ✔  223  13:15:07
+/usr/local/lib
+├── @microsoft/generator-sharepoint@1.9.1
+├── gulp@4.0.2
+├── nave@2.2.4
+├── nodemon@1.19.0
+├── npm@6.4.1
+└── yo@3.1.1
+
+/**************************
+
 #CREATE SHAREPOINT PROJECT
     yo @microsoft/sharepoint
 
@@ -22,3 +39,7 @@
 POWERLEVEL9K SETUP
 
  open ~/.zshrc 
+
+
+See NPM Packages
+	npm list -g --depth 0

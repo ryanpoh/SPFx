@@ -1,12 +1,12 @@
 import * as React from 'react';
-import styles from './React16.module.scss';
-import { IReact16Props } from './IReact16Props';
+import styles from './TestReact162.module.scss';
+import { ITestReact162Props } from './ITestReact162Props';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-export default class React16 extends React.Component<IReact16Props, {}> {
-  public render(): React.ReactElement<IReact16Props> {
+export default class TestReact162 extends React.Component<ITestReact162Props, {}> {
+  public render(): React.ReactElement<ITestReact162Props> {
     return (
-      <div className={ styles.react16 }>
+      <div className={ styles.testReact162 }>
         <div className={ styles.container }>
           <div className={ styles.row }>
             <div className={ styles.column }>

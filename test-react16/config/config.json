@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "react-16-web-part": {
+    "test-react-162-web-part": {
       "components": [
         {
-          "entrypoint": "./lib/webparts/react16/React16WebPart.js",
-          "manifest": "./src/webparts/react16/React16WebPart.manifest.json"
+          "entrypoint": "./lib/webparts/testReact162/TestReact162WebPart.js",
+          "manifest": "./src/webparts/testReact162/TestReact162WebPart.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "React16WebPartStrings": "lib/webparts/react16/loc/{locale}.js"
+    "TestReact162WebPartStrings": "lib/webparts/testReact162/loc/{locale}.js"
   }
 }
