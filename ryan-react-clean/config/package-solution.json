@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "ryan-react-clean-client-side-solution",
+    "id": "cbc7e617-b18a-4c7c-9e71-9c7cb3eb71da",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true
+  },
+  "paths": {
+    "zippedPackage": "solution/ryan-react-clean.sppkg"
+  }
+}

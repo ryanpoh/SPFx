@@ -1,0 +1,11 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "isCreatingSolution": true,
+    "environment": "spo",
+    "version": "1.5.1",
+    "libraryName": "ryan-react-clean",
+    "libraryId": "cbc7e617-b18a-4c7c-9e71-9c7cb3eb71da",
+    "packageManager": "npm",
+    "componentType": "webpart"
+  }
+}
