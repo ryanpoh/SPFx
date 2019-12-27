@@ -3,6 +3,10 @@
     nvm install -g node@8.11.4 OR nvm use 8.11.4
     npm install -g gulp@3.9.1 yo@2.0.5 @microsoft/generator-sharepoint@1.5.1
 
+
+#CREATE SHAREPOINT PROJECT
+    yo @microsoft/sharepoint
+
 #Need to do a  one-time dev cert activation for workbench support
     gulp trust-dev-cert
 
