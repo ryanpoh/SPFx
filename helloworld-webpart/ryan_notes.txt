@@ -32,7 +32,7 @@ REACT 16c(Node 10.15.3)
 #Run Local Bench
     gulp serve
 
-=> ERROR: SWITCH OFF POSTGRESS because default port conflicts.
+=> ERROR: SWITCH OFF POSTGRES because default port conflicts.
 
 
 

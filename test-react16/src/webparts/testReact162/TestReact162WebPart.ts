@@ -15,6 +15,7 @@ export interface ITestReact162WebPartProps {
   description: string;
 }
 
+// !Renders the TestReact162.tsx file. React.createElement is like <TestReact162 description: this.props.description />
 export default class TestReact162WebPart extends BaseClientSideWebPart<ITestReact162WebPartProps> {
 
   public render(): void {
