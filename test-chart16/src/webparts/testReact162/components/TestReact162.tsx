@@ -8,17 +8,12 @@ import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 
 import { IColor } from "../IColor";
 import { ColorList, IColorListProps } from "./ColorList";
+import PieChart from "./PieChart";
 
 export default class TestReact162 extends React.Component<
   ITestReact162Props, //Props
   ITestReact162State //State
 > {
-  private _colors: IColor[] = [
-    { id: 1, title: "red" },
-    { id: 2, title: "blue" },
-    { id: 3, title: "green" }
-  ];
-
   constructor(props: ITestReact162Props) {
     super(props);
     this.state = { colors: [] };
@@ -47,27 +42,15 @@ export default class TestReact162 extends React.Component<
   }
 
   public componentDidMount(): void {
-    this.getColorsFromSpList().then((spListItemColors: IColor[]) => {
+    this.getColorsFromSpList().then((spListItemColors) => {
       this.setState({ colors: spListItemColors });
     });
   }
 
   public render(): React.ReactElement<ITestReact162Props> {
     return (
-      <div className={styles.testReact162}>
-        <div className={styles.container}>
-          <div className={styles.row}>
-            <div className={styles.column}>
-              <span className={styles.title}>
-                Welcome to SharePoint + React16 !
-              </span>
-              <ColorList
-                colors={this.state.colors}
-                onRemoveColor={this._removeColor}
-              />
-            </div>
-          </div>
-        </div>
+      <div>
+        <PieChart />
       </div>
     );
   }
