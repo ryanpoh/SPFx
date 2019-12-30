@@ -1,0 +1,24 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "12b8ad56-3237-4b9e-a1b6-7840cbc07f88",
+  "alias": "TestReact162WebPart",
+  "componentType": "WebPart",
+
+  "version": "*",
+  "manifestVersion": 2,
+
+
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart"],
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Other" },
+    "title": { "default": "test-react-16-2" },
+    "description": { "default": "test-react-16-2 description" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "test-react-16-2"
+    }
+  }]
+}
