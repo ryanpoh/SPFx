@@ -4,7 +4,7 @@ import { ISpfxWebPartState } from "./ISpfxWebPartState";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 
 import { ISchema } from "../ISchema";
-import PieChart from "./PieChart";
+import HeadlineCard from "./HeadlineCard";
 
 export default class TestReact162 extends React.Component<
   ISpfxWebPartProps,
@@ -60,8 +60,9 @@ export default class TestReact162 extends React.Component<
   public render(): React.ReactElement<ISpfxWebPartProps> {
     return (
       <div>
-        <h2>A Simple Pie Chart</h2>
-        <PieChart data={this.state.spListData} />
+        <h2>Today</h2>
+        {/* <PieChart data={this.state.spListData} /> */}
+        <HeadlineCard />
       </div>
     );
   }

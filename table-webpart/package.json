@@ -21,20 +21,29 @@
     "@types/webpack-env": "1.13.1",
     "office-ui-fabric-react": "6.189.2",
     "react": "16.8.5",
-    "react-dom": "16.8.5"
+    "react-dom": "16.8.5",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.2",
+    "semantic-ui-sass": "^2.4.2",
+    "style-loader": "^1.1.2"
   },
   "resolutions": {
     "@types/react": "16.8.8"
   },
   "devDependencies": {
-    "@microsoft/sp-build-web": "1.9.1",
-    "@microsoft/sp-tslint-rules": "1.9.1",
-    "@microsoft/sp-module-interfaces": "1.9.1",
-    "@microsoft/sp-webpart-workbench": "1.9.1",
     "@microsoft/rush-stack-compiler-2.9": "0.7.16",
-    "gulp": "~3.9.1",
+    "@microsoft/sp-build-web": "1.9.1",
+    "@microsoft/sp-module-interfaces": "1.9.1",
+    "@microsoft/sp-tslint-rules": "1.9.1",
+    "@microsoft/sp-webpart-workbench": "1.9.1",
     "@types/chai": "3.4.34",
     "@types/mocha": "2.2.38",
-    "ajv": "~5.2.2"
+    "ajv": "~5.2.2",
+    "css-loader": "^3.4.0",
+    "file-loader": "^5.0.2",
+    "gulp": "~3.9.1",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "url-loader": "^3.0.0"
   }
 }

@@ -29,7 +29,7 @@
     ]
   },
   "include": [
-    "src/**/*.ts", "src/webparts/testReact162/components/PieChart.tsx"
+    "src/**/*.ts", "src/webparts/testReact162/components/HeadlineCard.tsx"
   ],
   "exclude": [
     "node_modules",
