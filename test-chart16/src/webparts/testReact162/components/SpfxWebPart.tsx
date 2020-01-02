@@ -39,11 +39,22 @@ export default class TestReact162 extends React.Component<
     });
   }
 
-  //? MOUNTING DATA INTO COMPONENT STATE
+  //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
   public componentDidMount(): void {
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
+  }
+
+  //? DYNAMIC UPDATING OF DATA INTO COMPONENT STATE EVERY 5 SECONDS
+  public componentWillMount() {
+    setInterval(
+      () =>
+        this.getDataFromSPListDb().then(listFromSPDb => {
+          this.setState({ spListData: listFromSPDb });
+        }),
+      5000
+    );
   }
 
   public render(): React.ReactElement<ISpfxWebPartProps> {
