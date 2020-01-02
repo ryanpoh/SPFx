@@ -34,6 +34,11 @@ REACT 16c(Node 10.15.3)
 
 => ERROR: SWITCH OFF POSTGRES because default port conflicts.
 
+#Package React
+
+	gulp --ship
+	gulp package-solution --ship
+
 
 
 POWERLEVEL9K SETUP
