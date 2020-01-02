@@ -2,6 +2,8 @@ import * as React from "react";
 import { Pie } from "react-chartjs-2";
 import { ChartOptions } from "chart.js";
 
+
+//? FUNCTIONAL COMPONENT. BUT CANT USE .JS TAG
 const PieChart = props => {
   const dataObj = {
     labels: ["Red", "Green", "Yellow"],

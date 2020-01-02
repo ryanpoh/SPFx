@@ -7,14 +7,15 @@ import { ISchema } from "../ISchema";
 import PieChart from "./PieChart";
 
 export default class TestReact162 extends React.Component<
-  ISpfxWebPartProps, //Props
-  ISpfxWebPartState //State
+  ISpfxWebPartProps,
+  ISpfxWebPartState
 > {
   constructor(props: ISpfxWebPartProps) {
     super(props);
     this.state = { spListData: [] };
   }
 
+  //? FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
       const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('reactList')/items?$select=Id,Title,chartData`;
@@ -38,6 +39,7 @@ export default class TestReact162 extends React.Component<
     });
   }
 
+  //? MOUNTING DATA INTO COMPONENT STATE
   public componentDidMount(): void {
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
