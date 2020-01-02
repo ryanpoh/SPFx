@@ -15,7 +15,7 @@ export default class TestReact162 extends React.Component<
     this.state = { spListData: [] };
   }
 
-  //? FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
+  //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
       const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('reactList')/items?$select=Id,Title,chartData`;
@@ -40,7 +40,7 @@ export default class TestReact162 extends React.Component<
   }
 
   //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
-  public componentDidMount(): void {
+  public componentDidMount() {
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
