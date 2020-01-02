@@ -49,6 +49,7 @@ export default class TestReact162 extends React.Component<
   public render(): React.ReactElement<ISpfxWebPartProps> {
     return (
       <div>
+        <h2>A Simple Pie Chart</h2>
         <PieChart data={this.state.spListData} />
       </div>
     );

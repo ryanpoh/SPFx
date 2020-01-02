@@ -9,6 +9,10 @@ const PieChart = props => {
     labels: ["Red", "Green", "Yellow"],
     datasets: [
       {
+        /*
+        ? Can use RGBA format for colors as well.
+        ? e.g: => backgroundColor: 'rgba(255,99,132,0.2)'
+        */
         data: props.data.map(a => a.chartData),
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
