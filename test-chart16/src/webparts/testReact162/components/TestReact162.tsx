@@ -14,6 +14,12 @@ export default class TestReact162 extends React.Component<
   ITestReact162Props, //Props
   ITestReact162State //State
 > {
+  private _colors: IColor[] = [
+    { id: 1, title: "red", chartData: 20 },
+    { id: 2, title: "blue", chartData: 20 },
+    { id: 3, title: "green", chartData: 20 }
+  ];
+
   constructor(props: ITestReact162Props) {
     super(props);
     this.state = { colors: [] };
@@ -21,7 +27,7 @@ export default class TestReact162 extends React.Component<
 
   private getColorsFromSpList(): Promise<IColor[]> {
     return new Promise<IColor[]>((resolve, reject) => {
-      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('reactList')/items?$select=Id,Title`;
+      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('reactList')/items?$select=Id,Title,chartData`;
       this.props.spHttpClient
         .get(endpoint, SPHttpClient.configurations.v1)
         .then((response: SPHttpClientResponse) => {
@@ -32,7 +38,8 @@ export default class TestReact162 extends React.Component<
           for (let index = 0; index < jsonResponse.value.length; index++) {
             spListItemColors.push({
               id: jsonResponse.value[index].Id,
-              title: jsonResponse.value[index].Title
+              title: jsonResponse.value[index].Title,
+              chartData: jsonResponse.value[index].chartData
             });
 
             resolve(spListItemColors);
@@ -42,7 +49,7 @@ export default class TestReact162 extends React.Component<
   }
 
   public componentDidMount(): void {
-    this.getColorsFromSpList().then((spListItemColors) => {
+    this.getColorsFromSpList().then(spListItemColors => {
       this.setState({ colors: spListItemColors });
     });
   }
@@ -50,7 +57,7 @@ export default class TestReact162 extends React.Component<
   public render(): React.ReactElement<ITestReact162Props> {
     return (
       <div>
-        <PieChart />
+        <PieChart data={this.state.colors} />
       </div>
     );
   }

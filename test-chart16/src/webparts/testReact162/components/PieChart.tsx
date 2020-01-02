@@ -1,19 +1,17 @@
 import * as React from "react";
 import { Pie } from "react-chartjs-2";
 import { ChartOptions } from "chart.js";
+import {IColor} from "../IColor"
 
-export default class PieChart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
 
-  render() {
-    const data = {
+const pieChart = (props) => {
+    const dataObj = {
       labels: ["Red", "Green", "Yellow"],
       datasets: [
         {
-          data: [300, 50, 100],
+          // data: [300, 50, 100],
+          // data: props.data.chartData,
+          data: props.data.map(a => a.chartData),
           backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
           hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
         }
@@ -26,6 +24,11 @@ export default class PieChart extends React.Component {
       }
     };
 
-    return <Pie data={data} options={options} />;
-  }
+    return <Pie data={dataObj} options={options} />;
+    
+
 }
+
+export default pieChart;
+
+
