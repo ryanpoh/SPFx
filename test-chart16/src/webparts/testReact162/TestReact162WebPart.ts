@@ -8,20 +8,20 @@ import {
 } from "@microsoft/sp-webpart-base";
 
 import * as strings from "TestReact162WebPartStrings";
-import TestReact162 from "./components/TestReact162";
-import { ITestReact162Props } from "./components/ITestReact162Props";
+import SpfxWebPart from "./components/SpfxWebPart";
+import { ISpfxWebPartProps } from "./components/ISpfxWebPartProps";
 
-export interface ITestReact162WebPartProps {
+export interface IRootWebPartProps {
   description: string;
 }
 
 // !Renders the TestReact162.tsx file. React.createElement is like <TestReact162 description: this.props.description />
-export default class TestReact162WebPart extends BaseClientSideWebPart<
-  ITestReact162WebPartProps
+export default class RootWebPart extends BaseClientSideWebPart<  //? <TestReact162>. For some reason, name of file can't change. otherwise warning.
+  IRootWebPartProps
 > {
   public render(): void {
-    const element: React.ReactElement<ITestReact162Props> = React.createElement(
-      TestReact162,
+    const element: React.ReactElement<ISpfxWebPartProps> = React.createElement(
+      SpfxWebPart,  // ?why is it still named as TestReact162 in dev tools
       {
         description: this.properties.description,
         spHttpClient: this.context.spHttpClient,
