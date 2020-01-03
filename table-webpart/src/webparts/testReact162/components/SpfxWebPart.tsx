@@ -68,23 +68,24 @@ export default class TestReact162 extends React.Component<
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Header</Table.HeaderCell>
-              <Table.HeaderCell>Header</Table.HeaderCell>
-              <Table.HeaderCell>Header</Table.HeaderCell>
+              <Table.HeaderCell>PID</Table.HeaderCell>
+              <Table.HeaderCell>Employee ID</Table.HeaderCell>
+              <Table.HeaderCell>Department</Table.HeaderCell>
+              <Table.HeaderCell>GUID</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
           <Table.Body>
             {this.state.spListData.map(data => (
-              <Table.Row>
-                <TableRowCells />
+              <Table.Row key={data.id}>
+                <TableRowCells data={data} />
               </Table.Row>
             ))}
           </Table.Body>
 
           <Table.Footer>
             <Table.Row>
-              <Table.HeaderCell colSpan="3">
+              <Table.HeaderCell colSpan="4">
                 <Menu floated="right" pagination>
                   <Menu.Item as="a" icon>
                     <Icon name="chevron left" />
