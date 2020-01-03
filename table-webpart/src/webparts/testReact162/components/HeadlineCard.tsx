@@ -8,16 +8,16 @@ const HeadlineCard = props => {
   const extra = (
     <a>
       <Icon name="user" />
-      16 Friends
+      {props.extra}
     </a>
   );
 
   return (
     <Card
-      image="https://react.semantic-ui.com/images/avatar/large/elliot.jpg"
+      image={props.image}
       header={props.header}
-      meta="Friend"
-      description="Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat."
+      meta={props.meta}
+      description={props.description}
       extra={extra}
     />
   );
