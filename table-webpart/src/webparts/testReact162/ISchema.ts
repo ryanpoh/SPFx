@@ -5,4 +5,5 @@ export interface ISchema {
   description: string;
   meta: string;
   extra: string;
+  icon: string;
 }

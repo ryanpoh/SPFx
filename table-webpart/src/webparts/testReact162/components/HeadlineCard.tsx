@@ -7,7 +7,7 @@ import { Card, Icon } from "semantic-ui-react";
 const HeadlineCard = props => {
   const extra = (
     <a>
-      <Icon name="user" />
+      <Icon name={props.icon} />
       {props.extra}
     </a>
   );
