@@ -3,8 +3,8 @@ import { ISpfxWebPartProps } from "./ISpfxWebPartProps";
 import { ISpfxWebPartState } from "./ISpfxWebPartState";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import { ISchema } from "../ISchema";
-import HeadlineCard from "./HeadlineCard";
-import { Grid, GridColumn } from "semantic-ui-react";
+import TableRowCells from "./HeadlineCard";
+import { Icon, Label, Menu, Table } from "semantic-ui-react";
 
 export default class TestReact162 extends React.Component<
   ISpfxWebPartProps,
@@ -65,21 +65,44 @@ export default class TestReact162 extends React.Component<
   public render(): React.ReactElement<ISpfxWebPartProps> {
     return (
       <div>
-        <h2>Today</h2>
-        <Grid columns={5}>
-          {this.state.spListData.map(data => (
-            <GridColumn key={data.id} stretched>
-              <HeadlineCard
-                header={data.header}
-                image={data.image}
-                description={data.description}
-                meta={data.meta}
-                extra={data.extra}
-                icon={data.icon}
-              />
-            </GridColumn>
-          ))}
-        </Grid>
+        <h2>Perfomance Metrics</h2>
+
+        <Table celled>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Header</Table.HeaderCell>
+              <Table.HeaderCell>Header</Table.HeaderCell>
+              <Table.HeaderCell>Header</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+
+          <Table.Body>
+            {this.state.spListData.map(data => (
+              <Table.Row>
+                <TableRowCells />
+              </Table.Row>
+            ))}
+          </Table.Body>
+
+          <Table.Footer>
+            <Table.Row>
+              <Table.HeaderCell colSpan="3">
+                <Menu floated="right" pagination>
+                  <Menu.Item as="a" icon>
+                    <Icon name="chevron left" />
+                  </Menu.Item>
+                  <Menu.Item as="a">1</Menu.Item>
+                  <Menu.Item as="a">2</Menu.Item>
+                  <Menu.Item as="a">3</Menu.Item>
+                  <Menu.Item as="a">4</Menu.Item>
+                  <Menu.Item as="a" icon>
+                    <Icon name="chevron right" />
+                  </Menu.Item>
+                </Menu>
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Footer>
+        </Table>
       </div>
     );
   }
