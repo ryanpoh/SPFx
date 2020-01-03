@@ -5,6 +5,8 @@ import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import { ISchema } from "../ISchema";
 import TableRowCells from "./TableRowCells";
 import { Icon, Menu, Table } from "semantic-ui-react";
+
+//TODO ENABLE STYLING. PLAY AROUND WITH EXTERNALS IN CONFIG.JS TO FIX FONTS (IF NOT USING CDN)
 require("../../../../node_modules/semantic-ui-css/semantic.min.css");
 
 
