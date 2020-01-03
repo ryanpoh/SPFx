@@ -39,11 +39,14 @@ REACT 16c(Node 10.15.3)
 	gulp --ship
 	gulp package-solution --ship
 
-
+=> change, config, diet and web part manifest
 
 POWERLEVEL9K SETUP
 
  open ~/.zshrc 
+
+
+
 
 
 See NPM Packages

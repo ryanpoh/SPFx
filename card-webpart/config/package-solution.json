@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "test-react-16-2-client-side-solution",
+    "name": "ryan-card-solution",
     "id": "44938c7a-51b5-47d9-95d2-e29f1f18edf2",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false
   },
   "paths": {
-    "zippedPackage": "solution/test-react-16-2.sppkg"
+    "zippedPackage": "solution/ryan-card.sppkg"
   }
 }
