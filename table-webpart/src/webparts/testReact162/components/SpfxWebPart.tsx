@@ -4,7 +4,10 @@ import { ISpfxWebPartState } from "./ISpfxWebPartState";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import { ISchema } from "../ISchema";
 import TableRowCells from "./TableRowCells";
-import { Icon, Label, Menu, Table } from "semantic-ui-react";
+import { Icon, Menu, Table } from "semantic-ui-react";
+require("../../../../node_modules/semantic-ui-css/semantic.min.css");
+
+
 
 export default class TestReact162 extends React.Component<
   ISpfxWebPartProps,
