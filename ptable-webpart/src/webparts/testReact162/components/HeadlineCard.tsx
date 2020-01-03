@@ -1,26 +1,25 @@
 import * as React from "react";
-import { Card, Icon } from "semantic-ui-react";
-// import 'semantic-ui-css/semantic.min.css';
-// var css = require("style-loader!css-loader!../../../../node_modules/semantic-ui-css/semantic.min.css");
-// require("../styles/site.css");
+import { Header, Image, Table } from "semantic-ui-react";
 
-const HeadlineCard = props => {
-  const extra = (
-    <a>
-      <Icon name={props.icon} />
-      {props.extra}
-    </a>
-  );
-
+const TableCellRow = props => {
   return (
-    <Card
-      image={props.image}
-      header={props.header}
-      meta={props.meta}
-      description={props.description}
-      extra={extra}
-    />
+    <Table.Row key={props.data.id}>
+      <Table.Cell>
+        <Header as="h4" image>
+          <Image
+            src={props.data.image}
+            rounded
+            size="mini"
+          />
+          <Header.Content>
+            {props.data.name}
+            <Header.Subheader>{props.data.department}</Header.Subheader>
+          </Header.Content>
+        </Header>
+      </Table.Cell>
+      <Table.Cell>{props.data.yos}</Table.Cell>
+    </Table.Row>
   );
 };
 
-export default HeadlineCard;
+export default TableCellRow;

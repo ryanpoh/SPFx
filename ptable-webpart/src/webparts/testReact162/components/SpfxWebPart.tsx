@@ -3,8 +3,8 @@ import { ISpfxWebPartProps } from "./ISpfxWebPartProps";
 import { ISpfxWebPartState } from "./ISpfxWebPartState";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import { ISchema } from "../ISchema";
-import HeadlineCard from "./HeadlineCard";
-import { Grid, GridColumn } from "semantic-ui-react";
+import TableCellRow from "./HeadlineCard";
+import { Table } from "semantic-ui-react";
 
 export default class TestReact162 extends React.Component<
   ISpfxWebPartProps,
@@ -18,7 +18,7 @@ export default class TestReact162 extends React.Component<
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
-      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('HeadlineList')/items?$select=Id,Title,image,description,meta,status,icon`;
+      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('PTableList')/items?$select=Id,Title,image,department,yos`;
       this.props.spHttpClient
         .get(endpoint, SPHttpClient.configurations.v1)
         .then((response: SPHttpClientResponse) => {
@@ -27,15 +27,13 @@ export default class TestReact162 extends React.Component<
         .then((jsonResponse: any) => {
           let listFromSPDb: ISchema[] = [];
           for (let index = 0; index < jsonResponse.value.length; index++) {
-            //?  TO GET INDEX NAMES SEE THE COLUMN NAME USING WEBSITE URL. IT WILL NOT CHANGE EVEN WHEN YOU RENAME IT.
+            //?  TO GET INDEX NAMES SEE THE COLUMN NAME USING WEBSITE URL. IT WILL NOT CHANGE EVEN WHEN YOU RENAME IT. HEX FORMAT CANNOT ALSO.
             listFromSPDb.push({
               id: jsonResponse.value[index].Id,
-              header: jsonResponse.value[index].Title,
+              name: jsonResponse.value[index].Title,
               image: jsonResponse.value[index].image,
-              description: jsonResponse.value[index].description,
-              meta: jsonResponse.value[index].meta,
-              extra: jsonResponse.value[index].status,
-              icon: jsonResponse.value[index].icon
+              department: jsonResponse.value[index].department,
+              yos: jsonResponse.value[index].yos
             });
 
             resolve(listFromSPDb);
@@ -65,21 +63,22 @@ export default class TestReact162 extends React.Component<
   public render(): React.ReactElement<ISpfxWebPartProps> {
     return (
       <div>
-        <h2>Today</h2>
-        <Grid columns={5}>
-          {this.state.spListData.map(data => (
-            <GridColumn key={data.id} stretched>
-              <HeadlineCard
-                header={data.header}
-                image={data.image}
-                description={data.description}
-                meta={data.meta}
-                extra={data.extra}
-                icon={data.icon}
-              />
-            </GridColumn>
-          ))}
-        </Grid>
+        <h2>Smol Table</h2>
+
+        <Table basic="very" celled collapsing>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Direct Reports</Table.HeaderCell>
+              <Table.HeaderCell>Years of Service</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+
+          <Table.Body>
+            {this.state.spListData.map(data => (
+              <TableCellRow data={data} />
+            ))}
+          </Table.Body>
+        </Table>
       </div>
     );
   }
