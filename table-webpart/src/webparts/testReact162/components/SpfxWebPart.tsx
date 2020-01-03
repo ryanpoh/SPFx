@@ -18,7 +18,7 @@ export default class TestReact162 extends React.Component<
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
-      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('HeadlineList')/items?$select=Id,Title,chartData`;
+      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('reactList')/items?$select=Id,Title`;
       this.props.spHttpClient
         .get(endpoint, SPHttpClient.configurations.v1)
         .then((response: SPHttpClientResponse) => {
@@ -29,8 +29,11 @@ export default class TestReact162 extends React.Component<
           for (let index = 0; index < jsonResponse.value.length; index++) {
             listFromSPDb.push({
               id: jsonResponse.value[index].Id,
-              title: jsonResponse.value[index].Title,
-              chartData: jsonResponse.value[index].chartData
+              header: jsonResponse.value[index].Title,
+              // image: jsonResponse.value[index].image,
+              // description: jsonResponse.value[index].description,
+              // meta: jsonResponse.value[index].meta,
+              // extra: jsonResponse.value[index].extra
             });
 
             resolve(listFromSPDb);
@@ -62,7 +65,9 @@ export default class TestReact162 extends React.Component<
       <div>
         <h2>Today</h2>
         {/* <PieChart data={this.state.spListData} /> */}
-        <HeadlineCard />
+        {this.state.spListData.map((data) => (
+          <HeadlineCard key={data.id} header={data.header} />
+        ))}
       </div>
     );
   }
