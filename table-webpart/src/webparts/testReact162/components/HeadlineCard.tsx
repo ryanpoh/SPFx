@@ -15,7 +15,7 @@ const HeadlineCard = props => {
   return (
     <Card
       image="https://react.semantic-ui.com/images/avatar/large/elliot.jpg"
-      header= {props.header}
+      header={props.header}
       meta="Friend"
       description="Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat."
       extra={extra}

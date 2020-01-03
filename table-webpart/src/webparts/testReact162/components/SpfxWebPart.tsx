@@ -5,6 +5,7 @@ import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 
 import { ISchema } from "../ISchema";
 import HeadlineCard from "./HeadlineCard";
+import { Grid, GridColumn } from "semantic-ui-react";
 
 export default class TestReact162 extends React.Component<
   ISpfxWebPartProps,
@@ -29,7 +30,7 @@ export default class TestReact162 extends React.Component<
           for (let index = 0; index < jsonResponse.value.length; index++) {
             listFromSPDb.push({
               id: jsonResponse.value[index].Id,
-              header: jsonResponse.value[index].Title,
+              header: jsonResponse.value[index].Title
               // image: jsonResponse.value[index].image,
               // description: jsonResponse.value[index].description,
               // meta: jsonResponse.value[index].meta,
@@ -64,10 +65,14 @@ export default class TestReact162 extends React.Component<
     return (
       <div>
         <h2>Today</h2>
-        {/* <PieChart data={this.state.spListData} /> */}
-        {this.state.spListData.map((data) => (
-          <HeadlineCard key={data.id} header={data.header} />
-        ))}
+        <Grid columns={5}>
+          {/* <PieChart data={this.state.spListData} /> */}
+          {this.state.spListData.map(data => (
+            <GridColumn key={data.id}>
+              <HeadlineCard header={data.header} />
+            </GridColumn>
+          ))}
+        </Grid>
       </div>
     );
   }
