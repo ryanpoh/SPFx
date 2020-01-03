@@ -1,9 +1,7 @@
 export interface ISchema {
   id: number;
-  header: string;
-  image: string;
-  description: string;
-  meta: string;
-  extra: string;
-  icon: string;
+  pid: string;
+  eid: string;
+  department: string;
+  guid: string;
 }

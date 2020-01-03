@@ -18,7 +18,7 @@ export default class TestReact162 extends React.Component<
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
-      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('HeadlineList')/items?$select=Id,Title,image,description,meta,status,icon`;
+      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('TableList')/items?$select=Id,Title,e62k,j6ym,cyuk`;
       this.props.spHttpClient
         .get(endpoint, SPHttpClient.configurations.v1)
         .then((response: SPHttpClientResponse) => {
@@ -30,12 +30,10 @@ export default class TestReact162 extends React.Component<
             //?  TO GET INDEX NAMES SEE THE COLUMN NAME USING WEBSITE URL. IT WILL NOT CHANGE EVEN WHEN YOU RENAME IT.
             listFromSPDb.push({
               id: jsonResponse.value[index].Id,
-              header: jsonResponse.value[index].Title,
-              image: jsonResponse.value[index].image,
-              description: jsonResponse.value[index].description,
-              meta: jsonResponse.value[index].meta,
-              extra: jsonResponse.value[index].status,
-              icon: jsonResponse.value[index].icon
+              pid: jsonResponse.value[index].Title,
+              eid: jsonResponse.value[index].e62k,
+              department: jsonResponse.value[index].j6ym,
+              guid: jsonResponse.value[index].cyuk
             });
 
             resolve(listFromSPDb);
