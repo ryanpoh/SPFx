@@ -9,9 +9,9 @@ build.addSuppression(
 build.configureWebpack.mergeConfig({
   additionalConfiguration: generatedConfiguration => {
     generatedConfiguration.module.rules.push({
-      test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
       use: {
-        loader: "url-loader"
+        loader: "url-loader?limit=100000"
       }
     });
     return generatedConfiguration;
