@@ -18,7 +18,7 @@ export default class TestReact162 extends React.Component<
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
-      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('reactList')/items?$select=Id,Title,chartData`;
+      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('HeadlineList')/items?$select=Id,Title,chartData`;
       this.props.spHttpClient
         .get(endpoint, SPHttpClient.configurations.v1)
         .then((response: SPHttpClientResponse) => {
