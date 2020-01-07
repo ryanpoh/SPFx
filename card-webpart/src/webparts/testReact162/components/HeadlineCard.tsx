@@ -1,25 +1,31 @@
 import * as React from "react";
-import { Card, Icon } from "semantic-ui-react";
-// import 'semantic-ui-css/semantic.min.css';
-// var css = require("style-loader!css-loader!../../../../node_modules/semantic-ui-css/semantic.min.css");
-// require("../styles/site.css");
+import { Card, Icon, Image } from "semantic-ui-react";
+
+const descStyle = {
+  color: "green"
+};
 
 const HeadlineCard = props => {
-  const extra = (
-    <a>
-      <Icon name={props.icon} />
-      {props.extra}
-    </a>
-  );
-
   return (
-    <Card
-      image={props.image}
-      header={props.header}
-      meta={props.meta}
-      description={props.description}
-      extra={extra}
-    />
+    <Card stretched>
+      <Image src={props.image} wrapped ui={false} />
+      <Card.Content>
+        <Card.Header>{props.header}</Card.Header>
+        <br />
+        <Card.Meta>
+          <span className="date">{props.meta}</span>
+        </Card.Meta>
+        <Card.Description>
+          <span style={descStyle}> {props.description} </span>
+        </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <a>
+          <Icon name={props.icon} />
+          {props.extra}
+        </a>
+      </Card.Content>
+    </Card>
   );
 };
 

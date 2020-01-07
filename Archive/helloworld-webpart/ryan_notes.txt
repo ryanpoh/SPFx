@@ -50,3 +50,57 @@ POWERLEVEL9K SETUP
 
 See NPM Packages
 	npm list -g --depth 0
+
+
+
+#Install dev
+npm install --only=dev
+
+
+class="ms-FocusZone css-92 ms-CommandBar root-89"
+
+
+https://support.office.com/en-us/article/excel-for-windows-training-9bc05390-e94c-46af-a5b3-d7c22f6990bb?wt.mc_id=otc_home&ui=en-US&rs=en-US&ad=US
+
+Mail
+-dark mode
+-rules
+-calendar
+-adele (scheduling)
+
+Cloud
+-saved for later
+-sync symbols
+-file explorer
+
+
+https://liquidoffice.sharepoint.com/sites/RyanComSite
+
+
+INSTALL PNP Provisioning
+
+NOTE: Remove-Module SharePointPnPPowerShellOnline. Mac not supported
+
+Install-Module SharePointPnPPowerShellOnline
+
+Invoke-Expression (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/sharepoint/PnP-PowerShell/master/Samples/Modules.Install/Install-SharePointPnPPowerShell.ps1')
+
+Update-Module SharePointPnPPowerShell*
+
+Get-Module SharePointPnPPowerShell* -ListAvailable | Select-Object Name,Version | Sort-Object Version -Descending
+
+
+SHAREPOINT PROVISIONING COMMANDS
+
+Connect-PnPOnline -Url https://liquidoffice.sharepoint.com/sites/RyanPoh -UseWebLogin
+get-pnpweb
+get-pnpprovisioningtemplate -Out C:\pnpdemo.xml -PersistBrandingFiles
+get-pnpprovisioningtemplate -Out C:\pnpdemo.pnp -PersistBrandingFiles
+
+
+Connect-PnPOnline -Url https://liquidoffice.sharepoint.com/sites/RyanComSite -UseWebLogin
+Apply-PnPProvisioningTemplate -Path C:\pnpdemo.pnp
+
+
+
+

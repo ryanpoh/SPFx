@@ -6,6 +6,9 @@ import { ISchema } from "../ISchema";
 import TableCellRow from "./HeadlineCard";
 import { Table } from "semantic-ui-react";
 
+//TODO ENABLE STYLING. PLAY AROUND WITH EXTERNALS IN CONFIG.JS TO FIX FONTS (IF NOT USING CDN)
+require("../../../../node_modules/semantic-ui-css/semantic.min.css");
+
 export default class TestReact162 extends React.Component<
   ISpfxWebPartProps,
   ISpfxWebPartState

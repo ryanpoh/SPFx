@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
     "name": "ryan-table-solution",
-    "id": "44938c7a-51b5-47d9-95d2-e29f1f18edf2",
+    "id": "2c7671f0-d9be-4bfd-96f6-f67a03692b35",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false

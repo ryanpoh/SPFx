@@ -3,8 +3,8 @@
     "isCreatingSolution": true,
     "environment": "spo",
     "version": "1.9.1",
-    "libraryName": "test-react-16-2",
-    "libraryId": "44938c7a-51b5-47d9-95d2-e29f1f18edf2",
+    "libraryName": "card-webpart",
+    "libraryId": "a2f34aeb-3060-417b-9de6-2b6748170137",
     "packageManager": "npm",
     "isDomainIsolated": false,
     "componentType": "webpart"
