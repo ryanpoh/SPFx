@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "ryan-card-webpart-client-side-solution",
+    "id": "e65ae48c-3c45-4d60-bc31-db491ccce68f",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/ryan-card-webpart.sppkg"
+  }
+}

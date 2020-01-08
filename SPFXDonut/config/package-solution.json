@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "ryan-donutchart-client-side-solution",
+    "id": "bdf4ed4d-5e4a-4b21-ae83-a5401a6e6ad1",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/ryan-donutchart.sppkg"
+  }
+}
