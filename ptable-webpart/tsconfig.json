@@ -29,7 +29,7 @@
     ]
   },
   "include": [
-    "src/**/*.ts", "src/webparts/testReact162/components/HeadlineCard.tsx"
+    "src/**/*.ts", "src/webparts/testReact162/components/TableCellRow.tsx"
   ],
   "exclude": [
     "node_modules",

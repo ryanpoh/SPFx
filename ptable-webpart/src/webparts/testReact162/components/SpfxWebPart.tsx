@@ -3,7 +3,7 @@ import { ISpfxWebPartProps } from "./ISpfxWebPartProps";
 import { ISpfxWebPartState } from "./ISpfxWebPartState";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import { ISchema } from "../ISchema";
-import TableCellRow from "./HeadlineCard";
+import TableCellRow from "./TableCellRow";
 import { Table } from "semantic-ui-react";
 
 //TODO ENABLE STYLING. PLAY AROUND WITH EXTERNALS IN CONFIG.JS TO FIX FONTS (IF NOT USING CDN)

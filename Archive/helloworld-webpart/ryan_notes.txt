@@ -33,12 +33,30 @@ REACT 16c(Node 10.15.3)
 
 => ERROR: SWITCH OFF POSTGRES because default port conflicts.
 
+
+
 #Package React
 
+
+
+--Clean
+
+gulp clean
+gulp bundle --ship
+gulp package-solution --ship
+Upload .sppkg file from sharepoint\solution to your tenant App Catalog
+E.g.: https://<tenant>.sharepoint.com/sites/AppCatalog/AppCatalog
+Add the web part to a site collection, and test it on a page
+
+
+
+--Basic
 	gulp --ship
 	gulp package-solution --ship
 
 => change, config, diet and web part manifest
+
+
 
 POWERLEVEL9K SETUP
 
@@ -59,22 +77,6 @@ npm install --only=dev
 
 class="ms-FocusZone css-92 ms-CommandBar root-89"
 
-
-https://support.office.com/en-us/article/excel-for-windows-training-9bc05390-e94c-46af-a5b3-d7c22f6990bb?wt.mc_id=otc_home&ui=en-US&rs=en-US&ad=US
-
-Mail
--dark mode
--rules
--calendar
--adele (scheduling)
-
-Cloud
--saved for later
--sync symbols
--file explorer
-
-
-https://liquidoffice.sharepoint.com/sites/RyanComSite
 
 
 INSTALL PNP Provisioning
@@ -102,5 +104,11 @@ Connect-PnPOnline -Url https://liquidoffice.sharepoint.com/sites/RyanComSite -Us
 Apply-PnPProvisioningTemplate -Path C:\pnpdemo.pnp
 
 
-
+1. Change package.json
+2. Change gulpfile
+3. Remove, scss
+3. Add state and schema file and main component
+4. Edit all codes
+5. Npm install
+6. Gulp dev cert
 
