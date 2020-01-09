@@ -16,16 +16,17 @@ export interface IRyanMessagebarWebPartProps {
 }
 
 export default class RyanMessagebarWebPart extends BaseClientSideWebPart<
-  //? <TestReact162>. For some reason, name of file can't change. otherwise warning.
+  //? Great documentation: https://docs.microsoft.com/en-us/javascript/api/sp-page-context/pagecontext?view=sp-typescript-latest#user
   IRyanMessagebarWebPartProps
 > {
   public render(): void {
     const element: React.ReactElement<IRyanMessagebarProps> = React.createElement(
-      RyanMessagebar, // ?why is it still named as TestReact162 in dev tools
+      RyanMessagebar,
       {
         description: this.properties.description,
         spHttpClient: this.context.spHttpClient,
-        currentSiteUrl: this.context.pageContext.web.absoluteUrl
+        currentSiteUrl: this.context.pageContext.web.absoluteUrl,
+        siteCollectionUrl: this.context.pageContext.site.absoluteUrl
       }
     );
 

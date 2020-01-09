@@ -4,8 +4,7 @@ import { IRyanMessagebarState } from "./IRyanMessagebarState";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import { ISchema } from "../ISchema";
 import MessageCarousel from "./MessageCarousel";
-import { Icon, Menu, Table } from "semantic-ui-react";
-import { injectGlobal } from "styled-components";
+import axios from "../axios-license";
 
 require("../../../../node_modules/semantic-ui-css/semantic.min.css");
 
@@ -46,6 +45,20 @@ export default class RyanMessagebar extends React.Component<
 
   //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
   public componentDidMount() {
+    //? Registering New License with SRKK server
+    const newSiteLicense = {
+      client: 'test',
+      currentSite: this.props.currentSiteUrl, //? Will change if it is at subsite
+      siteCollection: this.props.siteCollectionUrl, //? Always constant
+      tenant: this.props.siteCollectionUrl.split('/')[2], //? Extract the base URL to get tenant
+      isLicenseActive: true,
+      date: new Date()
+    };
+    axios
+      .post("/siteLicenses.json", newSiteLicense)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
 

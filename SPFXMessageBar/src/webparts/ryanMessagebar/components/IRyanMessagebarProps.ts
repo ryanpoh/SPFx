@@ -4,4 +4,5 @@ export interface IRyanMessagebarProps {
   description: string;
   spHttpClient: SPHttpClient;
   currentSiteUrl: string;
+  siteCollectionUrl: string;
 }
