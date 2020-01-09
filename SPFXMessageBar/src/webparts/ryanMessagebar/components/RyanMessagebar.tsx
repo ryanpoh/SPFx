@@ -17,7 +17,7 @@ export default class RyanMessagebar extends React.Component<
     super(props);
     this.state = {
       spListData: [],
-      isLicenseActive: false
+      isLicenseActive: true
     };
   }
 
@@ -47,35 +47,76 @@ export default class RyanMessagebar extends React.Component<
     });
   }
 
-  //   addSite = async () => {
-  //   // fetch data from a url endpoint
-  //   const response = await axios.get("/tenants.json?orderBy='height'&startAt=3&print=pretty");
-  //   const data = await response.data();
+  deactivateLicenseHandler = () => {
+    const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
+    const getObject = theObject => {
+      var result = null;
+      if (theObject instanceof Array) {
+        for (var i = 0; i < theObject.length; i++) {
+          result = getObject(theObject[i]);
+          if (result) {
+            break;
+          }
+        }
+      } else {
+        for (var prop in theObject) {
+          prop + ": " + theObject[prop];
+          if (prop == "tenant") {
+            if (theObject[prop] == tenantUrl) {
+              return theObject;
+            }
+          }
+          if (
+            theObject[prop] instanceof Object ||
+            theObject[prop] instanceof Array
+          ) {
+            result = getObject(theObject[prop]);
+            if (result) {
+              break;
+            }
+          }
+        }
+      }
 
-  //   return data;
-  // }
+      return result;
+    };
 
-  //   getKeyofTenantObj = res => {
-  //     axios.get(`/tenants.json/${res.data}.json`).then(res => { return this.addSiteToTenantDB(res) })
-  //   }
+    axios
+      .get(`/tenants.json`)
+      .then(res => {
+        this.setState({ isLicenseActive: false });
+        console.log("License deactivated!");
+        let key = Object.keys(res.data)[0];
+        return axios.patch(`/tenants/${key}.json`, {
+          //? Add ...res.data[key] for PUT request
+          isLicenseActive: false
+        });
+      })
+      .then(response => {
+        console.log("Response", response);
+      });
+  };
 
   addNewTenant = () => {
-    //? Registering New Tenant License with SRKK server
     const tenantUrl = this.props.siteCollectionUrl.split("/")[2]; //? Extract the base URL to get tenant
-
-    // const siteCollection = this.props.siteCollectionUrl; //? site colletction
 
     const newTenant = {
       tenant: tenantUrl,
       isLicenseActive: true,
       date: new Date()
     };
+
     axios
       .post(`/tenants.json`, newTenant)
       .then(res => {
-        console.log(res);
+        //? Adding parent key as a child property.
+        return axios.patch(`/tenants/${res.data.name}.json`, {
+          key: res.data.name
+        });
       })
-      .catch(error => console.log(error));
+      .then(response => {
+        console.log("Response", response);
+      });
   };
 
   checkLicenseActive = () => {
@@ -141,8 +182,8 @@ export default class RyanMessagebar extends React.Component<
 
   public componentDidMount() {
     //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
-
-    this.checkLicenseActive();
+    this.addNewTenant();
+    // this.checkLicenseActive();
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
