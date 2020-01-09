@@ -5,6 +5,7 @@ import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import { ISchema } from "../ISchema";
 import MessageCarousel from "./MessageCarousel";
 import axios from "../axios-license";
+import { Message } from "semantic-ui-react";
 
 require("../../../../node_modules/semantic-ui-css/semantic.min.css");
 
@@ -14,7 +15,10 @@ export default class RyanMessagebar extends React.Component<
 > {
   constructor(props: IRyanMessagebarProps) {
     super(props);
-    this.state = { spListData: [] };
+    this.state = {
+      spListData: [],
+      isLicenseActive: false
+    };
   }
 
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
@@ -43,35 +47,104 @@ export default class RyanMessagebar extends React.Component<
     });
   }
 
-  //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
-  public componentDidMount() {
-    //? Registering New License with SRKK server
-    const newSiteLicense = {
-      client: 'test',
-      currentSite: this.props.currentSiteUrl, //? Will change if it is at subsite
-      siteCollection: this.props.siteCollectionUrl, //? Always constant
-      tenant: this.props.siteCollectionUrl.split('/')[2], //? Extract the base URL to get tenant
+  //   addSite = async () => {
+  //   // fetch data from a url endpoint
+  //   const response = await axios.get("/tenants.json?orderBy='height'&startAt=3&print=pretty");
+  //   const data = await response.data();
+
+  //   return data;
+  // }
+
+  //   getKeyofTenantObj = res => {
+  //     axios.get(`/tenants.json/${res.data}.json`).then(res => { return this.addSiteToTenantDB(res) })
+  //   }
+
+  addNewTenant = () => {
+    //? Registering New Tenant License with SRKK server
+    const tenantUrl = this.props.siteCollectionUrl.split("/")[2]; //? Extract the base URL to get tenant
+
+    // const siteCollection = this.props.siteCollectionUrl; //? site colletction
+
+    const newTenant = {
+      tenant: tenantUrl,
       isLicenseActive: true,
       date: new Date()
     };
     axios
-      .post("/siteLicenses.json", newSiteLicense)
-      .then(response => console.log(response))
+      .post(`/tenants.json`, newTenant)
+      .then(res => {
+        console.log(res);
+      })
       .catch(error => console.log(error));
+  };
 
-    this.getDataFromSPListDb().then(listFromSPDb => {
-      this.setState({ spListData: listFromSPDb });
+  checkLicenseActive = () => {
+    const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
+    const getObject = theObject => {
+      var result = null;
+      if (theObject instanceof Array) {
+        for (var i = 0; i < theObject.length; i++) {
+          result = getObject(theObject[i]);
+          if (result) {
+            break;
+          }
+        }
+      } else {
+        for (var prop in theObject) {
+          prop + ": " + theObject[prop];
+          if (prop == "tenant") {
+            if (theObject[prop] == tenantUrl) {
+              return theObject;
+            }
+          }
+          if (
+            theObject[prop] instanceof Object ||
+            theObject[prop] instanceof Array
+          ) {
+            result = getObject(theObject[prop]);
+            if (result) {
+              break;
+            }
+          }
+        }
+      }
 
-      //! ONLY FOR GENERATING DEMO DATA FOR PS1 FILES
-      this.state.spListData.map(data =>
-        console.log(
-          `Add-PnPListItem -List "MessagebarList" -Values @{
+      return result;
+    };
+    axios
+      .get(`/tenants.json`)
+      .then(res => {
+        let targetObj = getObject(res.data);
+        if (targetObj.isLicenseActive === true) {
+          console.log("License is active!");
+          this.setState({ isLicenseActive: true });
+        } else {
+          console.log("License has expired.");
+          this.setState({ isLicenseActive: false });
+        }
+      })
+      .catch(error => console.log(error));
+  };
+
+  generateDemoData = () => {
+    //? ONLY FOR GENERATING DEMO DATA FOR PS1 FILES
+    this.state.spListData.map(data =>
+      console.log(
+        `Add-PnPListItem -List "MessagebarList" -Values @{
             "Title" =  "${data.title}"; 
             "desc"=" ${data.desc}";
             "icon"=" ${data.icon}";
           }`
-        )
-      );
+      )
+    );
+  };
+
+  public componentDidMount() {
+    //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
+
+    this.checkLicenseActive();
+    this.getDataFromSPListDb().then(listFromSPDb => {
+      this.setState({ spListData: listFromSPDb });
     });
   }
 
@@ -89,7 +162,16 @@ export default class RyanMessagebar extends React.Component<
   public render(): React.ReactElement<IRyanMessagebarProps> {
     return (
       <React.Fragment>
-        <MessageCarousel data={this.state.spListData} />
+        {this.state.isLicenseActive ? (
+          <MessageCarousel data={this.state.spListData} />
+        ) : (
+          <Message negative>
+            <Message.Header>
+              We're sorry your SRKK account has been deactivated.
+            </Message.Header>
+            <p>Your license has expired.</p>
+          </Message>
+        )}
       </React.Fragment>
     );
   }
