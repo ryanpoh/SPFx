@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "ryan-messagebar-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/ryanMessagebar/RyanMessagebarWebPart.js",
+          "manifest": "./src/webparts/ryanMessagebar/RyanMessagebarWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "RyanMessagebarWebPartStrings": "lib/webparts/ryanMessagebar/loc/{locale}.js"
+  }
+}

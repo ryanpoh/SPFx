@@ -49,6 +49,18 @@ export default class RyanTable extends React.Component<
   public componentDidMount() {
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
+
+      //! ONLY FOR GENERATING DEMO DATA FOR PS1 FILES
+      this.state.spListData.map(data =>
+        console.log(
+          `Add-PnPListItem -List "HeadlineList" -Values @{
+            "Title" =  "${data.pid}"; 
+            "e62k"=" ${data.eid}";
+            "j6ym"=" ${data.department}";
+            "cyuk"=" ${data.guid}";
+          }`
+        )
+      );
     });
   }
 

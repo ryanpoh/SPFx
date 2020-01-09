@@ -92,6 +92,22 @@ Update-Module SharePointPnPPowerShell*
 Get-Module SharePointPnPPowerShell* -ListAvailable | Select-Object Name,Version | Sort-Object Version -Descending
 
 
+CREATE PNP SITE
+New-PnPSite -Type CommunicationSite -Title Contoso -Url https://tenant.sharepoint.com/sites/contoso
+
+ADD ITEMS TO EXISTING LIST
+Add-PnPListItem -List "Demo List" -Values @{"Title" = "Test Title"; "Category"="Test Category"}
+
+DEMO DATA INSERT
+Add-PnPListItem -List "HeadlineList" -Values @{"Title" = "Predicted Downtime"; "image"="https://c8.alamy.com/comp/T9P1A1/automation-industry-machine-production-robotics-flat-color-icon-vector-T9P1A1.jpg"}
+
+GET COMMANDS
+
+ Get-Command -Module SharePointPnPPowerShellOnline  
+
+Try: Get-Command -Module *PnP*
+
+
 SHAREPOINT PROVISIONING COMMANDS
 
 Connect-PnPOnline -Url https://liquidoffice.sharepoint.com/sites/RyanPoh -UseWebLogin
