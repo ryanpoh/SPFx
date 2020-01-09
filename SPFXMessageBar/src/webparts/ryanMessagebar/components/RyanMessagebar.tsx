@@ -49,6 +49,7 @@ export default class RyanMessagebar extends React.Component<
 
   deactivateLicenseHandler = () => {
     const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
+
     const getObject = theObject => {
       var result = null;
       if (theObject instanceof Array) {
@@ -81,20 +82,14 @@ export default class RyanMessagebar extends React.Component<
       return result;
     };
 
-    axios
-      .get(`/tenants.json`)
-      .then(res => {
-        this.setState({ isLicenseActive: false });
-        console.log("License deactivated!");
-        let key = Object.keys(res.data)[0];
-        return axios.patch(`/tenants/${key}.json`, {
-          //? Add ...res.data[key] for PUT request
-          isLicenseActive: false
-        });
-      })
-      .then(response => {
-        console.log("Response", response);
+    axios.get(`/tenants.json`).then(res => {
+      console.log("License deactivated!");
+      let targetObj = getObject(res.data);
+      return axios.patch(`/tenants/${targetObj.key}.json`, {
+        //? Add ...res.data[key] for PUT request
+        isLicenseActive: false
       });
+    });
   };
 
   addNewTenant = () => {
@@ -106,17 +101,12 @@ export default class RyanMessagebar extends React.Component<
       date: new Date()
     };
 
-    axios
-      .post(`/tenants.json`, newTenant)
-      .then(res => {
-        //? Adding parent key as a child property.
-        return axios.patch(`/tenants/${res.data.name}.json`, {
-          key: res.data.name
-        });
-      })
-      .then(response => {
-        console.log("Response", response);
+    axios.post(`/tenants.json`, newTenant).then(res => {
+      //? Adding parent key as a child property.
+      return axios.patch(`/tenants/${res.data.name}.json`, {
+        key: res.data.name
       });
+    });
   };
 
   checkLicenseActive = () => {
@@ -182,8 +172,7 @@ export default class RyanMessagebar extends React.Component<
 
   public componentDidMount() {
     //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
-    this.addNewTenant();
-    // this.checkLicenseActive();
+    this.checkLicenseActive();
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
