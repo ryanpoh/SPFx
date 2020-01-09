@@ -1,26 +1,30 @@
 import * as React from "react";
 import Carousel from "semantic-ui-carousel-react";
-import { Button } from "semantic-ui-react";
+import { Message } from "semantic-ui-react";
 
 const MessageCarousel = props => {
-
   let messages = [];
 
   props.data.map(a => {
-    messages.push(
-      {
-        render: () => {
-          return <Button fluid>{a.title}</Button>
-        }
-      })
+    messages.push({
+      render: () => {
+        return (
+          <Message
+            icon={a.icon}
+            header={a.title}
+            content={a.desc}
+          />
+        );
+      }
+    });
   });
 
   return (
     <React.Fragment>
       <Carousel
         elements={messages}
-        duration={3000}
-        animation="fade right"
+        duration={5000}
+        animation="fly right"  //? Only 'fade' mode will keep the correct formatting.
         showNextPrev={false}
         showIndicators={true}
       />

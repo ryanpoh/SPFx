@@ -9,14 +9,6 @@ import { injectGlobal } from "styled-components";
 
 require("../../../../node_modules/semantic-ui-css/semantic.min.css");
 
-// injectGlobal`
-//   body {
-//     .mainHeader-68 {
-//       display: none;
-//     }
-//   }
-// `;
-
 export default class RyanMessagebar extends React.Component<
   IRyanMessagebarProps,
   IRyanMessagebarState
@@ -29,7 +21,7 @@ export default class RyanMessagebar extends React.Component<
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
-      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('MessagebarList')/items?$select=Id,Title,desc,icon,license`;
+      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('MessagebarList')/items?$select=Id,Title,desc,icon`;
       this.props.spHttpClient
         .get(endpoint, SPHttpClient.configurations.v1)
         .then((response: SPHttpClientResponse) => {
@@ -43,8 +35,7 @@ export default class RyanMessagebar extends React.Component<
               id: jsonResponse.value[index].Id,
               title: jsonResponse.value[index].Title,
               desc: jsonResponse.value[index].desc,
-              icon: jsonResponse.value[index].icon,
-              license: jsonResponse.value[index].license //? Sharepoint Yes/No - 1 or 0
+              icon: jsonResponse.value[index].icon
             });
 
             resolve(listFromSPDb);
@@ -65,7 +56,6 @@ export default class RyanMessagebar extends React.Component<
             "Title" =  "${data.title}"; 
             "desc"=" ${data.desc}";
             "icon"=" ${data.icon}";
-            "license"=" ${data.license}"; 
           }`
         )
       );
@@ -73,15 +63,15 @@ export default class RyanMessagebar extends React.Component<
   }
 
   //? DYNAMIC UPDATING OF DATA INTO COMPONENT STATE EVERY 5 SECONDS
-  public componentWillMount() {
-    setInterval(
-      () =>
-        this.getDataFromSPListDb().then(listFromSPDb => {
-          this.setState({ spListData: listFromSPDb });
-        }),
-      5000
-    );
-  }
+  // public componentWillMount() {
+  //   setInterval(
+  //     () =>
+  //       this.getDataFromSPListDb().then(listFromSPDb => {
+  //         this.setState({ spListData: listFromSPDb });
+  //       }),
+  //     5000
+  //   );
+  // }
 
   public render(): React.ReactElement<IRyanMessagebarProps> {
     return (

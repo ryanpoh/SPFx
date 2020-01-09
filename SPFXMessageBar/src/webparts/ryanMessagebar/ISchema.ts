@@ -3,5 +3,4 @@ export interface ISchema {
   title: string;
   desc: string;
   icon: string;
-  license: number;
 }
