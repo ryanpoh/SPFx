@@ -123,7 +123,7 @@ export default class RyanMessagebar extends React.Component<
         ) : (
           <Message negative>
             <Message.Header>
-              We're sorry your SRKK account has been deactivated.
+              We're sorry your SRKK tenant account has been deactivated.
             </Message.Header>
             <p>Your license has expired.</p>
           </Message>

@@ -73,3 +73,22 @@
       5000
     );
   }
+
+    public render(): React.ReactElement<IRyanMessagebarProps> {
+    return (
+      <React.Fragment>
+        {this.state.isLicenseActive === "true" ? (
+          <MessageCarousel data={this.state.spListData} />
+        ) : (
+          <Message negative>
+            <Message.Header>
+              We're sorry your SRKK tenant account has been deactivated.
+            </Message.Header>
+            <p>Your license has expired.</p>
+          </Message>
+        )}
+      </React.Fragment>
+    );
+  }
+
+  2. change state (isLicenseActive: 'true') and state schema to strong
