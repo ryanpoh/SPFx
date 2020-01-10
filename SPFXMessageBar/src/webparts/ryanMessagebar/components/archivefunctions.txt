@@ -1,0 +1,111 @@
+  deactivateLicenseHandler = () => {
+    const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
+
+    const getObject = theObject => {
+      var result = null;
+      if (theObject instanceof Array) {
+        for (var i = 0; i < theObject.length; i++) {
+          result = getObject(theObject[i]);
+          if (result) {
+            break;
+          }
+        }
+      } else {
+        for (var prop in theObject) {
+          prop + ": " + theObject[prop];
+          if (prop == "tenant") {
+            if (theObject[prop] == tenantUrl) {
+              return theObject;
+            }
+          }
+          if (
+            theObject[prop] instanceof Object ||
+            theObject[prop] instanceof Array
+          ) {
+            result = getObject(theObject[prop]);
+            if (result) {
+              break;
+            }
+          }
+        }
+      }
+
+      return result;
+    };
+
+    axios.get(`/tenants.json`).then(res => {
+      console.log("License deactivated!");
+      let targetObj = getObject(res.data);
+      return axios.patch(`/tenants/${targetObj.key}.json`, {
+        //? Add ...res.data[key] for PUT request
+        isLicenseActive: false
+      });
+    });
+  };
+
+
+
+
+  checkLicenseActive = () => {
+    const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
+    const getObject = theObject => {
+      var result = null;
+      if (theObject instanceof Array) {
+        for (var i = 0; i < theObject.length; i++) {
+          result = getObject(theObject[i]);
+          if (result) {
+            break;
+          }
+        }
+      } else {
+        for (var prop in theObject) {
+          prop + ": " + theObject[prop];
+          if (prop == "tenant") {
+            if (theObject[prop] == tenantUrl) {
+              console.log(theObject)
+              return theObject;
+            }
+          }
+          if (
+            theObject[prop] instanceof Object ||
+            theObject[prop] instanceof Array
+          ) {
+            result = getObject(theObject[prop]);
+            if (result) {
+              break;
+            }
+          }
+        }
+      }
+
+      return result;
+    };
+    axios
+      .get(`/tenants.json`)
+      .then(res => {
+        let targetObj = getObject(res.data);
+        this.setState({ isLicenseActive: targetObj.isLicenseActive });
+        // if (targetObj.isLicenseActive === 'true') {
+        //   console.log("License is active!");
+        //   this.setState({ isLicenseActive: 'true' });
+        // } else {
+        //   console.log("License has expired.");
+        //   this.setState({ isLicenseActive: 'false' });
+        // }
+      })
+      .catch(error => console.log(error));
+  };
+
+
+
+
+  //? DYNAMIC UPDATING OF DATA INTO COMPONENT STATE EVERY 5 SECONDS
+  // public componentWillMount() {
+  //   setInterval(
+  //     () =>
+  //       this.getDataFromSPListDb().then(listFromSPDb => {
+  //         this.setState({ spListData: listFromSPDb });
+  //       }),
+  //     5000
+  //   );
+  // }

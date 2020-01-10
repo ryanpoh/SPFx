@@ -17,7 +17,7 @@ export default class RyanMessagebar extends React.Component<
     super(props);
     this.state = {
       spListData: [],
-      isLicenseActive: true
+      isLicenseActive: "true"
     };
   }
 
@@ -40,74 +40,11 @@ export default class RyanMessagebar extends React.Component<
               desc: jsonResponse.value[index].desc,
               icon: jsonResponse.value[index].icon
             });
-
             resolve(listFromSPDb);
           }
         });
     });
   }
-
-  deactivateLicenseHandler = () => {
-    const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
-
-    const getObject = theObject => {
-      var result = null;
-      if (theObject instanceof Array) {
-        for (var i = 0; i < theObject.length; i++) {
-          result = getObject(theObject[i]);
-          if (result) {
-            break;
-          }
-        }
-      } else {
-        for (var prop in theObject) {
-          prop + ": " + theObject[prop];
-          if (prop == "tenant") {
-            if (theObject[prop] == tenantUrl) {
-              return theObject;
-            }
-          }
-          if (
-            theObject[prop] instanceof Object ||
-            theObject[prop] instanceof Array
-          ) {
-            result = getObject(theObject[prop]);
-            if (result) {
-              break;
-            }
-          }
-        }
-      }
-
-      return result;
-    };
-
-    axios.get(`/tenants.json`).then(res => {
-      console.log("License deactivated!");
-      let targetObj = getObject(res.data);
-      return axios.patch(`/tenants/${targetObj.key}.json`, {
-        //? Add ...res.data[key] for PUT request
-        isLicenseActive: false
-      });
-    });
-  };
-
-  addNewTenant = () => {
-    const tenantUrl = this.props.siteCollectionUrl.split("/")[2]; //? Extract the base URL to get tenant
-
-    const newTenant = {
-      tenant: tenantUrl,
-      isLicenseActive: true,
-      date: new Date()
-    };
-
-    axios.post(`/tenants.json`, newTenant).then(res => {
-      //? Adding parent key as a child property.
-      return axios.patch(`/tenants/${res.data.name}.json`, {
-        key: res.data.name
-      });
-    });
-  };
 
   checkLicenseActive = () => {
     const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
@@ -146,13 +83,7 @@ export default class RyanMessagebar extends React.Component<
       .get(`/tenants.json`)
       .then(res => {
         let targetObj = getObject(res.data);
-        if (targetObj.isLicenseActive === true) {
-          console.log("License is active!");
-          this.setState({ isLicenseActive: true });
-        } else {
-          console.log("License has expired.");
-          this.setState({ isLicenseActive: false });
-        }
+        this.setState({ isLicenseActive: targetObj.isLicenseActive });
       })
       .catch(error => console.log(error));
   };
@@ -179,20 +110,15 @@ export default class RyanMessagebar extends React.Component<
   }
 
   //? DYNAMIC UPDATING OF DATA INTO COMPONENT STATE EVERY 5 SECONDS
-  // public componentWillMount() {
-  //   setInterval(
-  //     () =>
-  //       this.getDataFromSPListDb().then(listFromSPDb => {
-  //         this.setState({ spListData: listFromSPDb });
-  //       }),
-  //     5000
-  //   );
-  // }
+  public componentWillMount() {
+    //? For this webpart we won't be using live SPList because it messes with animation
+    setInterval(() => this.checkLicenseActive(), 7000);
+  }
 
   public render(): React.ReactElement<IRyanMessagebarProps> {
     return (
       <React.Fragment>
-        {this.state.isLicenseActive ? (
+        {this.state.isLicenseActive === "true" ? (
           <MessageCarousel data={this.state.spListData} />
         ) : (
           <Message negative>
