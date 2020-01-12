@@ -125,7 +125,7 @@ export default class RyanMessagebar extends React.Component<
             <Message.Header>
               We're sorry your SRKK tenant account has been deactivated.
             </Message.Header>
-            <p>Your license has expired.</p>
+            <p>Your license has expired. Please contact us for more information.</p>
           </Message>
         )}
       </React.Fragment>
