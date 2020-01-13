@@ -170,7 +170,7 @@ export default class RyanMessagebar extends React.Component<
       return (
         <React.Fragment>
           {this.state.isLicenseActive === "true" ? (
-            <PhotoGallery photos={this.state.photos.slice(60, 75)} />
+            <PhotoGallery photos={this.state.photos.slice(65, 75)} />
           ) : (
             <Message negative>
               <Message.Header>

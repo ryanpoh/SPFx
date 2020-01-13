@@ -19,7 +19,7 @@ function ExampleWithLightbox({ photos }) {
 
   return (
     <div>
-      <h2>Using with a Lightbox component</h2>
+      <h2>Photo Gallery</h2>
       <Gallery photos={photos} onClick={openLightbox} />
       <ModalGateway>
         {viewerIsOpen ? (
