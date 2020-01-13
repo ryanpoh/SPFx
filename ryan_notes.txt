@@ -123,8 +123,9 @@ Apply-PnPProvisioningTemplate -Path C:\pnpdemo.pnp
 1. Change package.json
 2. Change gulpfile
 3. Remove, scss
-3. Add state and schema file and main component
-4. Edit all codes
+3. Add state and schema file, axios-license and main component
+4. Edit all codes.
+5. Add http and current site to webbpart file
 5. Npm install
 6. Gulp dev cert
 
