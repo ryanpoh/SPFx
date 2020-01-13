@@ -21,7 +21,33 @@ export default class RyanMessagebar extends React.Component<
       spListData: [],
       isLicenseActive: "true",
       width: -1,
-      photos: null
+      // photos: null
+      photos: [
+        {
+          src:
+            "https://images.unsplash.com/photo-1578554819102-31469ee32b08?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
+          width: 4,
+          height: 3
+        },
+        {
+          src:
+            "https://images.unsplash.com/photo-1578737823301-cab0c2c7916f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+          width: 4,
+          height: 3
+        },
+        {
+          src:
+            "https://images.unsplash.com/photo-1578857182382-c6f9c4dc5bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2767&q=80",
+          width: 4,
+          height: 3
+        },
+        {
+          src:
+            "https://images.unsplash.com/photo-1578776675365-60c467cdc11b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80",
+          width: 2,
+          height: 3
+        }
+      ]
     };
     this.loadPhotos = this.loadPhotos.bind(this);
   }
@@ -29,7 +55,7 @@ export default class RyanMessagebar extends React.Component<
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
-      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('MessagebarList')/items?$select=Id,Title,desc,icon`;
+      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('PhotoGalleryList')/items?$select=Id,Title,width,height`;
       this.props.spHttpClient
         .get(endpoint, SPHttpClient.configurations.v1)
         .then((response: SPHttpClientResponse) => {
@@ -41,9 +67,9 @@ export default class RyanMessagebar extends React.Component<
             //?  TO GET INDEX NAMES SEE THE COLUMN NAME USING WEBSITE URL. IT WILL NOT CHANGE EVEN WHEN YOU RENAME IT.
             listFromSPDb.push({
               id: jsonResponse.value[index].Id,
-              title: jsonResponse.value[index].Title,
-              desc: jsonResponse.value[index].desc,
-              icon: jsonResponse.value[index].icon
+              src: jsonResponse.value[index].Title,
+              width: jsonResponse.value[index].width,
+              height: jsonResponse.value[index].height
             });
             resolve(listFromSPDb);
           }
@@ -51,45 +77,44 @@ export default class RyanMessagebar extends React.Component<
     });
   }
 
+  //? GENERATE SAMPLE IMAGES USING FLICKR API
   loadPhotos() {
-    const urlParams = {
-      api_key: "455b5e2fa6b951f9b9ab58a86d5e1f8a",
-      photoset_id: "72157708141247864",
-      user_id: "146659101@N08",
-      format: "json",
-      per_page: "120",
-      extras: "url_m,url_c,url_l,url_h,url_o"
-    };
-
-    let url =
-      "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos";
-    url = Object.keys(urlParams).reduce((acc, item) => {
-      return acc + "&" + item + "=" + urlParams[item];
-    }, url);
-
-    jsonp(url, { name: "jsonFlickrApi" }, (err, data) => {
-      let photos = data.photoset.photo.map(item => {
-        // let aspectRatio = parseFloat(item.width_o / item.height_o);
-        return {
-          src: item.url_l,
-          width: parseInt(item.width_o),
-          height: parseInt(item.height_o),
-          title: item.title,
-          alt: item.title,
-          key: item.id,
-          srcSet: [
-            `${item.url_m} ${item.width_m}w`,
-            `${item.url_c} ${item.width_c}w`,
-            `${item.url_l} ${item.width_l}w`,
-            `${item.url_h} ${item.width_h}w`
-          ],
-          sizes: "(min-width: 480px) 50vw, (min-width: 1024px) 33.3vw, 100vw"
-        };
-      });
-      this.setState({
-        photos: this.state.photos ? this.state.photos.concat(photos) : photos
-      });
-    });
+    // const urlParams = {
+    //   api_key: "455b5e2fa6b951f9b9ab58a86d5e1f8a",
+    //   photoset_id: "72157708141247864",
+    //   user_id: "146659101@N08",
+    //   format: "json",
+    //   per_page: "120",
+    //   extras: "url_m,url_c,url_l,url_h,url_o"
+    // };
+    // let url =
+    //   "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos";
+    // url = Object.keys(urlParams).reduce((acc, item) => {
+    //   return acc + "&" + item + "=" + urlParams[item];
+    // }, url);
+    // jsonp(url, { name: "jsonFlickrApi" }, (err, data) => {
+    //   let photos = data.photoset.photo.map(item => {
+    //     // let aspectRatio = parseFloat(item.width_o / item.height_o);
+    //     return {
+    //       src: item.url_l,
+    //       width: parseInt(item.width_o),
+    //       height: parseInt(item.height_o),
+    //       title: item.title,
+    //       alt: item.title,
+    //       key: item.id,
+    //       srcSet: [
+    //         `${item.url_m} ${item.width_m}w`,
+    //         `${item.url_c} ${item.width_c}w`,
+    //         `${item.url_l} ${item.width_l}w`,
+    //         `${item.url_h} ${item.width_h}w`
+    //       ],
+    //       sizes: "(min-width: 480px) 50vw, (min-width: 1024px) 33.3vw, 100vw"
+    //     };
+    //   });
+    //   this.setState({
+    //     photos: this.state.photos ? this.state.photos.concat(photos) : photos
+    //   });
+    // });
   }
 
   checkLicenseActive = () => {
@@ -141,9 +166,9 @@ export default class RyanMessagebar extends React.Component<
     this.state.spListData.map(data =>
       console.log(
         `Add-PnPListItem -List "MessagebarList" -Values @{
-            "Title" =  "${data.title}"; 
-            "desc"=" ${data.desc}";
-            "icon"=" ${data.icon}";
+            "Title" =  "${data.src}"; 
+            "width"=" ${data.width}";
+            "height"=" ${data.height}";
           }`
       )
     );
@@ -152,7 +177,7 @@ export default class RyanMessagebar extends React.Component<
   public componentDidMount() {
     //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
     this.checkLicenseActive();
-    this.loadPhotos();
+    // this.loadPhotos();
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
@@ -162,6 +187,13 @@ export default class RyanMessagebar extends React.Component<
   public componentWillMount() {
     //? For this webpart we won't be using live SPList because it messes with animation
     setInterval(() => this.checkLicenseActive(), 7000);
+    setInterval(
+      () =>
+        this.getDataFromSPListDb().then(listFromSPDb => {
+          this.setState({ spListData: listFromSPDb });
+        }),
+      5000
+    );
   }
 
   public render(): React.ReactElement<IRyanPhotogalleryProps> {
@@ -170,7 +202,8 @@ export default class RyanMessagebar extends React.Component<
       return (
         <React.Fragment>
           {this.state.isLicenseActive === "true" ? (
-            <PhotoGallery photos={this.state.photos.slice(65, 75)} />
+            // <PhotoGallery photos={this.state.photos.slice(65, 75)} />
+            <PhotoGallery photos={this.state.spListData} />
           ) : (
             <Message negative>
               <Message.Header>

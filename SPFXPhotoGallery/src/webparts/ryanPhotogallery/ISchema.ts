@@ -1,6 +1,6 @@
 export interface ISchema {
   id: number;
-  title: string;
-  desc: string;
-  icon: string;
+  src: string;
+  width: number;
+  height: number;
 }
