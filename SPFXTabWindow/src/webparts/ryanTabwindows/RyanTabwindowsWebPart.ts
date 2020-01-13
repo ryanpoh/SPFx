@@ -1,27 +1,31 @@
-import * as React from 'react';
-import * as ReactDom from 'react-dom';
-import { Version } from '@microsoft/sp-core-library';
+import * as React from "react";
+import * as ReactDom from "react-dom";
+import { Version } from "@microsoft/sp-core-library";
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
+} from "@microsoft/sp-webpart-base";
 
-import * as strings from 'RyanTabwindowsWebPartStrings';
-import RyanTabwindows from './components/RyanTabwindows';
-import { IRyanTabwindowsProps } from './components/IRyanTabwindowsProps';
+import * as strings from "RyanTabwindowsWebPartStrings";
+import RyanTabwindows from "./components/RyanTabwindows";
+import { IRyanTabwindowsProps } from "./components/IRyanTabwindowsProps";
 
 export interface IRyanTabwindowsWebPartProps {
   description: string;
 }
 
-export default class RyanTabwindowsWebPart extends BaseClientSideWebPart<IRyanTabwindowsWebPartProps> {
-
+export default class RyanTabwindowsWebPart extends BaseClientSideWebPart<
+  IRyanTabwindowsWebPartProps
+> {
   public render(): void {
-    const element: React.ReactElement<IRyanTabwindowsProps > = React.createElement(
+    const element: React.ReactElement<IRyanTabwindowsProps> = React.createElement(
       RyanTabwindows,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        spHttpClient: this.context.spHttpClient,
+        currentSiteUrl: this.context.pageContext.web.absoluteUrl,
+        siteCollectionUrl: this.context.pageContext.site.absoluteUrl
       }
     );
 
@@ -33,7 +37,7 @@ export default class RyanTabwindowsWebPart extends BaseClientSideWebPart<IRyanTa
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse("1.0");
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
@@ -47,7 +51,7 @@ export default class RyanTabwindowsWebPart extends BaseClientSideWebPart<IRyanTa
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
+                PropertyPaneTextField("description", {
                   label: strings.DescriptionFieldLabel
                 })
               ]
