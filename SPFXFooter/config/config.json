@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "ryan-footer-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/ryanFooter/RyanFooterWebPart.js",
+          "manifest": "./src/webparts/ryanFooter/RyanFooterWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "RyanFooterWebPartStrings": "lib/webparts/ryanFooter/loc/{locale}.js"
+  }
+}

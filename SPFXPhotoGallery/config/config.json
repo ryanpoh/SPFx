@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "ryan-photogallery-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/ryanPhotogallery/RyanPhotogalleryWebPart.js",
+          "manifest": "./src/webparts/ryanPhotogallery/RyanPhotogalleryWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "RyanPhotogalleryWebPartStrings": "lib/webparts/ryanPhotogallery/loc/{locale}.js"
+  }
+}

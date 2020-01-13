@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "spfx-barchart-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/spfxBarchart/SpfxBarchartWebPart.js",
+          "manifest": "./src/webparts/spfxBarchart/SpfxBarchartWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SpfxBarchartWebPartStrings": "lib/webparts/spfxBarchart/loc/{locale}.js"
+  }
+}
