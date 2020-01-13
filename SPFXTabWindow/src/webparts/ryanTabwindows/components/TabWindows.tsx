@@ -1,14 +1,5 @@
 import * as React from "react";
-import {
-  Label,
-  Menu,
-  Tab,
-  Item,
-  Image,
-  Icon,
-  Button,
-  Header
-} from "semantic-ui-react";
+import { Label, Menu, Tab, Item, Image, Icon, Button } from "semantic-ui-react";
 
 const paragraphPlaceholder = (
   <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
@@ -26,7 +17,7 @@ const getItems = arrObj => {
           <span className="cinema">{obj.meta}</span>
         </Item.Meta>
         <Item.Description>
-          {obj.paragraph ? obj.paragraph : paragraphPlaceholder}
+          <p>{obj.paragraph ? obj.paragraph : paragraphPlaceholder}</p>
         </Item.Description>
         <Item.Extra>
           <Button primary floated="right">

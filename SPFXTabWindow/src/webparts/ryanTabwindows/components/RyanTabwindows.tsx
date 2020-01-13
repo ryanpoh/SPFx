@@ -24,7 +24,7 @@ export default class RyanPTable extends React.Component<
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
-      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('TabWindowsList')/items?$select=Id,Title,image,meta,tag,labelIcon,labelContent,buttonIcon,buttonContent,pane`;
+      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('TabWindowsList')/items?$select=Id,Title,image,meta,tag,labelIcon,labelContent,buttonIcon,buttonContent,pane,paragraph`;
       this.props.spHttpClient
         .get(endpoint, SPHttpClient.configurations.v1)
         .then((response: SPHttpClientResponse) => {
@@ -45,7 +45,7 @@ export default class RyanPTable extends React.Component<
               buttonIcon: jsonResponse.value[index].buttonIcon,
               buttonContent: jsonResponse.value[index].buttonContent,
               pane: jsonResponse.value[index].pane,
-          
+              paragraph: jsonResponse.value[index].paragraph
             });
 
             resolve(listFromSPDb);

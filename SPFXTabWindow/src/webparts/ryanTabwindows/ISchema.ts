@@ -9,4 +9,5 @@ export interface ISchema {
   buttonIcon: string;
   buttonContent: string;
   pane: number;
+  paragraph: string;
 }
