@@ -1,27 +1,31 @@
-import * as React from 'react';
-import * as ReactDom from 'react-dom';
-import { Version } from '@microsoft/sp-core-library';
+import * as React from "react";
+import * as ReactDom from "react-dom";
+import { Version } from "@microsoft/sp-core-library";
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
+} from "@microsoft/sp-webpart-base";
 
-import * as strings from 'RyanPhotogalleryWebPartStrings';
-import RyanPhotogallery from './components/RyanPhotogallery';
-import { IRyanPhotogalleryProps } from './components/IRyanPhotogalleryProps';
+import * as strings from "RyanPhotogalleryWebPartStrings";
+import RyanPhotogallery from "./components/RyanPhotogallery";
+import { IRyanPhotogalleryProps } from "./components/IRyanPhotogalleryProps";
 
 export interface IRyanPhotogalleryWebPartProps {
   description: string;
 }
 
-export default class RyanPhotogalleryWebPart extends BaseClientSideWebPart<IRyanPhotogalleryWebPartProps> {
-
+export default class RyanPhotogalleryWebPart extends BaseClientSideWebPart<
+  IRyanPhotogalleryWebPartProps
+> {
   public render(): void {
-    const element: React.ReactElement<IRyanPhotogalleryProps > = React.createElement(
+    const element: React.ReactElement<IRyanPhotogalleryProps> = React.createElement(
       RyanPhotogallery,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        spHttpClient: this.context.spHttpClient,
+        currentSiteUrl: this.context.pageContext.web.absoluteUrl,
+        siteCollectionUrl: this.context.pageContext.site.absoluteUrl
       }
     );
 
@@ -33,7 +37,7 @@ export default class RyanPhotogalleryWebPart extends BaseClientSideWebPart<IRyan
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse("1.0");
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
@@ -47,7 +51,7 @@ export default class RyanPhotogalleryWebPart extends BaseClientSideWebPart<IRyan
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
+                PropertyPaneTextField("description", {
                   label: strings.DescriptionFieldLabel
                 })
               ]

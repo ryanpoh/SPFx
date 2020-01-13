@@ -29,7 +29,7 @@
     ]
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts", "src/webparts/ryanPhotogallery/components/PhotoGallery.tsx"
   ],
   "exclude": [
     "node_modules",
