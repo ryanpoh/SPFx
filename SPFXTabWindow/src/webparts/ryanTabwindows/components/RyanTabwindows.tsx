@@ -72,9 +72,18 @@ export default class RyanPTable extends React.Component<
       .catch(error => console.log(error));
   };
 
+  addSemanticUiCSS = () => {
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href =
+      "https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
+  };
+
   //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
   public componentDidMount() {
     this.checkLicenseActive();
+    this.addSemanticUiCSS();
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
