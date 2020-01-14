@@ -18,10 +18,13 @@ export interface IRyanBirthdayWebPartProps {
 export default class RyanBirthdayWebPart extends BaseClientSideWebPart<IRyanBirthdayWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IRyanBirthdayProps > = React.createElement(
+    const element: React.ReactElement<IRyanBirthdayProps> = React.createElement(
       RyanBirthday,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        spHttpClient: this.context.spHttpClient,
+        currentSiteUrl: this.context.pageContext.web.absoluteUrl,
+        siteCollectionUrl: this.context.pageContext.site.absoluteUrl
       }
     );
 
