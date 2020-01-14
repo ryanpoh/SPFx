@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Label, Menu, Tab, Item, Image, Icon, Button } from "semantic-ui-react";
+import ArticleModal from "./ArticleModal";
 
 const paragraphPlaceholder = (
   <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
@@ -17,13 +18,10 @@ const getItems = arrObj => {
           <span className="cinema">{obj.meta}</span>
         </Item.Meta>
         <Item.Description>
-          <p>{obj.paragraph ? obj.paragraph : paragraphPlaceholder}</p>
+          <p>{obj.paragraph ? obj.paragraph.slice(0, 200) + "..." : paragraphPlaceholder}</p>
         </Item.Description>
         <Item.Extra>
-          <Button primary floated="right">
-            {obj.buttonContent}
-            <Icon name={obj.buttonIcon} />
-          </Button>
+          <ArticleModal obj={obj} />
           <Label>{obj.tag}</Label>
           <Label icon={obj.labelIcon} content={obj.labelContent} />
         </Item.Extra>

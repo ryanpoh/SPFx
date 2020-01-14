@@ -56,44 +56,18 @@ export default class RyanPTable extends React.Component<
 
   checkLicenseActive = () => {
     const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
-    const getObject = theObject => {
-      var result = null;
-      if (theObject instanceof Array) {
-        for (var i = 0; i < theObject.length; i++) {
-          result = getObject(theObject[i]);
-          if (result) {
-            break;
-          }
-        }
-      } else {
-        for (var prop in theObject) {
-          prop + ": " + theObject[prop];
-          if (prop == "tenant") {
-            if (theObject[prop] == tenantUrl) {
-              return theObject;
-            }
-          }
-          if (
-            theObject[prop] instanceof Object ||
-            theObject[prop] instanceof Array
-          ) {
-            result = getObject(theObject[prop]);
-            if (result) {
-              break;
-            }
-          }
-        }
-      }
-
-      return result;
-    };
     axios
       .get(`/tenants.json`)
       .then(res => {
-        let targetObj = getObject(res.data);
-        this.setState({
-          isLicenseActive: targetObj.isLicenseActive
-        });
+        Object.keys(res.data).map(k => {
+          //? Object.keys returns an array of object keys
+          let obj = res.data[k];
+          if (obj.tenant === tenantUrl) {
+            this.setState({
+              isLicenseActive: obj.isLicenseActive
+            });
+          }
+        }); //? Extract object to put in array of object
       })
       .catch(error => console.log(error));
   };
@@ -104,10 +78,6 @@ export default class RyanPTable extends React.Component<
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
-  }
-
-  //? DYNAMIC UPDATING OF DATA INTO COMPONENT STATE EVERY 5 SECONDS
-  public componentWillMount() {
     setInterval(() => this.checkLicenseActive(), 7000);
     setInterval(
       () =>
