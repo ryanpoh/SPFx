@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "ryan-header-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/ryanHeader/RyanHeaderWebPart.js",
+          "manifest": "./src/webparts/ryanHeader/RyanHeaderWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "RyanHeaderWebPartStrings": "lib/webparts/ryanHeader/loc/{locale}.js"
+  }
+}
