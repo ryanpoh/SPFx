@@ -4,7 +4,8 @@ import { IRyanCardWebpartState } from "./IRyanCardWebpartState";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import { ISchema } from "../ISchema";
 import HeadlineCard from "./HeadlineCard";
-import { Grid, GridColumn, Message, Header, Divider } from "semantic-ui-react";
+import { Grid, GridColumn, Message } from "semantic-ui-react";
+import axios from "../axios-license";
 
 //TODO ENABLE STYLING. PLAY AROUND WITH EXTERNALS IN CONFIG.JS TO FIX FONTS (IF NOT USING CDN)
 require("../../../../node_modules/semantic-ui-css/semantic.min.css");
@@ -15,7 +16,10 @@ export default class TestReact162 extends React.Component<
 > {
   constructor(props: IRyanCardWebpartProps) {
     super(props);
-    this.state = { spListData: [] };
+    this.state = {
+      spListData: [],
+      isLicenseActive: "true"
+    };
   }
 
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
@@ -47,15 +51,40 @@ export default class TestReact162 extends React.Component<
     });
   }
 
-  //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
+  checkLicenseActive = () => {
+    const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
+    axios
+      .get(`/tenants.json`)
+      .then(res => {
+        Object.keys(res.data).map(k => {
+          //* Object.keys returns an array of object keys
+          let obj = res.data[k];
+          if (obj.tenant === tenantUrl) {
+            this.setState({
+              isLicenseActive: obj.isLicenseActive
+            });
+          }
+        }); //* Extract object to put in array of object
+      })
+      .catch(error => console.log(error));
+  };
+
+  addSemanticUiCSS = () => {
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href =
+      "https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
+  };
+
+  //* INITIAL FETCHING OF DATA INTO COMPONENT STATE
   public componentDidMount() {
+    this.checkLicenseActive();
+    this.addSemanticUiCSS();
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
-  }
-
-  //? DYNAMIC UPDATING OF DATA INTO COMPONENT STATE EVERY 5 SECONDS
-  public componentWillMount() {
+    setInterval(() => this.checkLicenseActive(), 7000);
     setInterval(
       () =>
         this.getDataFromSPListDb().then(listFromSPDb => {
@@ -68,21 +97,34 @@ export default class TestReact162 extends React.Component<
   public render(): React.ReactElement<IRyanCardWebpartProps> {
     return (
       <React.Fragment>
-        <h2>Today</h2>
-        <Grid columns={5}>
-          {this.state.spListData.map(data => (
-            <GridColumn key={data.id} stretched>
-              <HeadlineCard
-                header={data.header}
-                image={data.image}
-                description={data.description}
-                meta={data.meta}
-                extra={data.extra}
-                icon={data.icon}
-              />
-            </GridColumn>
-          ))}
-        </Grid>
+        {this.state.isLicenseActive === "true" ? (
+          <React.Fragment>
+            <h2>Today</h2>
+            <Grid columns={5}>
+              {this.state.spListData.map(data => (
+                <GridColumn key={data.id} stretched>
+                  <HeadlineCard
+                    header={data.header}
+                    image={data.image}
+                    description={data.description}
+                    meta={data.meta}
+                    extra={data.extra}
+                    icon={data.icon}
+                  />
+                </GridColumn>
+              ))}
+            </Grid>
+          </React.Fragment>
+        ) : (
+          <Message negative>
+            <Message.Header>
+              We're sorry your SRKK tenant account has been deactivated.
+            </Message.Header>
+            <p>
+              Your license has expired. Please contact us for more information.
+            </p>
+          </Message>
+        )}
       </React.Fragment>
     );
   }

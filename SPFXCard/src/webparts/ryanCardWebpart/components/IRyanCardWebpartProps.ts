@@ -4,4 +4,5 @@ export interface IRyanCardWebpartProps {
   description: string;
   spHttpClient: SPHttpClient;
   currentSiteUrl: string;
+  siteCollectionUrl: string;
 }
