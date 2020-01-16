@@ -138,11 +138,11 @@ Recompile codes without headers /
 Change to quotes
 Header web part finance.  /
 View all button top all web part <a> /
-QuickLinks
+QuickLinks /
 Remove header from card. Add license and css /
 
-RyanHeader
-RyanBirthday
+RyanHeader /
+RyanBirthday 
 RyanPTable
 RyanTable
 RyanTabWindows
