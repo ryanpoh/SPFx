@@ -3,10 +3,9 @@ import { IRyanHeaderProps } from "./IRyanHeaderProps";
 import { IRyanHeaderState } from "./IRyanHeaderState";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import { ISchema } from "../ISchema";
-import HeaderPart from "./HeaderPart";
-import { Table } from "semantic-ui-react";
+import HeaderList from "./HeaderList";
 import axios from "../axios-license";
-import { Message } from "semantic-ui-react";
+import { Message, Header, Divider, Button, Icon } from "semantic-ui-react";
 
 //TODO ENABLE STYLING. PLAY AROUND WITH EXTERNALS IN CONFIG.JS TO FIX FONTS (IF NOT USING CDN)
 require("../../../../node_modules/semantic-ui-css/semantic.min.css");
@@ -23,10 +22,10 @@ export default class RyanPTable extends React.Component<
     };
   }
 
-  //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
+  //* METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
-      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('BirthdayList')/items?$select=Id,Title,image,department,date`;
+      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('HeaderList')/items?$select=Id,Title,desc,items`;
       this.props.spHttpClient
         .get(endpoint, SPHttpClient.configurations.v1)
         .then((response: SPHttpClientResponse) => {
@@ -38,10 +37,9 @@ export default class RyanPTable extends React.Component<
             //?  TO GET INDEX NAMES SEE THE COLUMN NAME USING WEBSITE URL. IT WILL NOT CHANGE EVEN WHEN YOU RENAME IT. HEX FORMAT CANNOT ALSO.
             listFromSPDb.push({
               id: jsonResponse.value[index].Id,
-              name: jsonResponse.value[index].Title,
-              image: jsonResponse.value[index].image,
-              department: jsonResponse.value[index].department,
-              date: jsonResponse.value[index].date
+              title: jsonResponse.value[index].Title,
+              desc: jsonResponse.value[index].desc,
+              items: jsonResponse.value[index].items
             });
 
             resolve(listFromSPDb);
@@ -68,9 +66,18 @@ export default class RyanPTable extends React.Component<
       .catch(error => console.log(error));
   };
 
-  //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
+  addSemanticUiCSS = () => {
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href =
+      "https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
+  };
+
+  //* INITIAL FETCHING OF DATA INTO COMPONENT STATE
   public componentDidMount() {
     this.checkLicenseActive();
+    this.addSemanticUiCSS();
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
@@ -87,8 +94,24 @@ export default class RyanPTable extends React.Component<
   public render(): React.ReactElement<IRyanHeaderProps> {
     return (
       <React.Fragment>
+        {console.log(this.state.spListData)}
         {this.state.isLicenseActive === "true" ? (
-          <HeaderPart />
+          <React.Fragment>
+            <Header size="huge">
+              {this.state.spListData[0]
+                ? this.state.spListData[0].title
+                : "No Title"}
+            </Header>
+            <Divider />
+            <Message color="teal">
+              <Message.Header>
+                {this.state.spListData[0]
+                  ? this.state.spListData[0].desc
+                  : "No Description"}
+              </Message.Header>
+              <HeaderList data={this.state.spListData} />
+            </Message>
+          </React.Fragment>
         ) : (
           <Message negative>
             <Message.Header>

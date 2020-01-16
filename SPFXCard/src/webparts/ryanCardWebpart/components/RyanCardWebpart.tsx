@@ -68,22 +68,6 @@ export default class TestReact162 extends React.Component<
   public render(): React.ReactElement<IRyanCardWebpartProps> {
     return (
       <React.Fragment>
-        <Header size="huge">SRKK ADMIN DASHBOARD</Header>
-        <Divider />
-        <Message color="teal">
-          <Message.Header>
-            Welcome back! Here is what you missed while you were away:
-          </Message.Header>
-          <Message.List>
-            <Message.Item>
-              Electricity costings were higher compared to previous quarter.
-            </Message.Item>
-            <Message.Item>
-              An accident almost occured in Section 2B which could affect your
-              DWI.
-            </Message.Item>
-          </Message.List>
-        </Message>
         <h2>Today</h2>
         <Grid columns={5}>
           {this.state.spListData.map(data => (
