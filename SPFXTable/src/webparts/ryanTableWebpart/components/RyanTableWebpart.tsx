@@ -5,6 +5,8 @@ import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 import { ISchema } from "../ISchema";
 import TableRowCells from "./TableRowCells";
 import { Icon, Menu, Table } from "semantic-ui-react";
+import axios from "../axios-license";
+import { Message } from "semantic-ui-react";
 
 //TODO ENABLE STYLING. PLAY AROUND WITH EXTERNALS IN CONFIG.JS TO FIX FONTS (IF NOT USING CDN)
 require("../../../../node_modules/semantic-ui-css/semantic.min.css");
@@ -15,7 +17,10 @@ export default class RyanTable extends React.Component<
 > {
   constructor(props: IRyanTableWebpartProps) {
     super(props);
-    this.state = { spListData: [] };
+    this.state = {
+      spListData: [],
+      isLicenseActive: "true"
+    };
   }
 
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
@@ -45,27 +50,40 @@ export default class RyanTable extends React.Component<
     });
   }
 
-  //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
+  checkLicenseActive = () => {
+    const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
+    axios
+      .get(`/tenants.json`)
+      .then(res => {
+        Object.keys(res.data).map(k => {
+          //* Object.keys returns an array of object keys
+          let obj = res.data[k];
+          if (obj.tenant === tenantUrl) {
+            this.setState({
+              isLicenseActive: obj.isLicenseActive
+            });
+          }
+        }); //* Extract object to put in array of object
+      })
+      .catch(error => console.log(error));
+  };
+
+  addSemanticUiCSS = () => {
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href =
+      "https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
+  };
+
+  //* INITIAL FETCHING OF DATA INTO COMPONENT STATE
   public componentDidMount() {
+    this.checkLicenseActive();
+    this.addSemanticUiCSS();
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
-
-      //! ONLY FOR GENERATING DEMO DATA FOR PS1 FILES
-      this.state.spListData.map(data =>
-        console.log(
-          `Add-PnPListItem -List "HeadlineList" -Values @{
-            "Title" =  "${data.pid}"; 
-            "e62k"=" ${data.eid}";
-            "j6ym"=" ${data.department}";
-            "cyuk"=" ${data.guid}";
-          }`
-        )
-      );
     });
-  }
-
-  //? DYNAMIC UPDATING OF DATA INTO COMPONENT STATE EVERY 5 SECONDS
-  public componentWillMount() {
+    setInterval(() => this.checkLicenseActive(), 7000);
     setInterval(
       () =>
         this.getDataFromSPListDb().then(listFromSPDb => {
@@ -77,47 +95,56 @@ export default class RyanTable extends React.Component<
 
   public render(): React.ReactElement<IRyanTableWebpartProps> {
     return (
-      <div>
-        <h2>Perfomance Metrics</h2>
-
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>PID</Table.HeaderCell>
-              <Table.HeaderCell>Employee ID</Table.HeaderCell>
-              <Table.HeaderCell>Department</Table.HeaderCell>
-              <Table.HeaderCell>GUID</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-
-          <Table.Body>
-            {this.state.spListData.map(data => (
-              <Table.Row key={data.id}>
-                <TableRowCells data={data} />
+      <React.Fragment>
+        {this.state.isLicenseActive === "true" ? (
+          <Table celled>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>PID</Table.HeaderCell>
+                <Table.HeaderCell>Employee ID</Table.HeaderCell>
+                <Table.HeaderCell>Department</Table.HeaderCell>
+                <Table.HeaderCell>GUID</Table.HeaderCell>
               </Table.Row>
-            ))}
-          </Table.Body>
+            </Table.Header>
 
-          <Table.Footer>
-            <Table.Row>
-              <Table.HeaderCell colSpan="4">
-                <Menu floated="right" pagination>
-                  <Menu.Item as="a" icon>
-                    <Icon name="chevron left" />
-                  </Menu.Item>
-                  <Menu.Item as="a">1</Menu.Item>
-                  <Menu.Item as="a">2</Menu.Item>
-                  <Menu.Item as="a">3</Menu.Item>
-                  <Menu.Item as="a">4</Menu.Item>
-                  <Menu.Item as="a" icon>
-                    <Icon name="chevron right" />
-                  </Menu.Item>
-                </Menu>
-              </Table.HeaderCell>
-            </Table.Row>
-          </Table.Footer>
-        </Table>
-      </div>
+            <Table.Body>
+              {this.state.spListData.map(data => (
+                <Table.Row key={data.id}>
+                  <TableRowCells data={data} />
+                </Table.Row>
+              ))}
+            </Table.Body>
+
+            <Table.Footer>
+              <Table.Row>
+                <Table.HeaderCell colSpan="4">
+                  <Menu floated="right" pagination>
+                    <Menu.Item as="a" icon>
+                      <Icon name="chevron left" />
+                    </Menu.Item>
+                    <Menu.Item as="a">1</Menu.Item>
+                    <Menu.Item as="a">2</Menu.Item>
+                    <Menu.Item as="a">3</Menu.Item>
+                    <Menu.Item as="a">4</Menu.Item>
+                    <Menu.Item as="a" icon>
+                      <Icon name="chevron right" />
+                    </Menu.Item>
+                  </Menu>
+                </Table.HeaderCell>
+              </Table.Row>
+            </Table.Footer>
+          </Table>
+        ) : (
+          <Message negative>
+            <Message.Header>
+              We're sorry your SRKK tenant account has been deactivated.
+            </Message.Header>
+            <p>
+              Your license has expired. Please contact us for more information.
+            </p>
+          </Message>
+        )}
+      </React.Fragment>
     );
   }
 }

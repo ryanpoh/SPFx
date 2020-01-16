@@ -21,7 +21,7 @@ export default class RyanPTable extends React.Component<
     };
   }
 
-  //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
+  //* METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
       const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('TabWindowsList')/items?$select=Id,Title,image,meta,tag,labelIcon,labelContent,buttonIcon,buttonContent,pane,paragraph`;
@@ -33,7 +33,7 @@ export default class RyanPTable extends React.Component<
         .then((jsonResponse: any) => {
           let listFromSPDb: ISchema[] = [];
           for (let index = 0; index < jsonResponse.value.length; index++) {
-            //?  TO GET INDEX NAMES SEE THE COLUMN NAME USING WEBSITE URL. IT WILL NOT CHANGE EVEN WHEN YOU RENAME IT. HEX FORMAT CANNOT ALSO.
+            //*  TO GET INDEX NAMES SEE THE COLUMN NAME USING WEBSITE URL. IT WILL NOT CHANGE EVEN WHEN YOU RENAME IT. HEX FORMAT CANNOT ALSO.
             listFromSPDb.push({
               id: jsonResponse.value[index].Id,
               title: jsonResponse.value[index].Title,
@@ -60,14 +60,14 @@ export default class RyanPTable extends React.Component<
       .get(`/tenants.json`)
       .then(res => {
         Object.keys(res.data).map(k => {
-          //? Object.keys returns an array of object keys
+          //* Object.keys returns an array of object keys
           let obj = res.data[k];
           if (obj.tenant === tenantUrl) {
             this.setState({
               isLicenseActive: obj.isLicenseActive
             });
           }
-        }); //? Extract object to put in array of object
+        }); //* Extract object to put in array of object
       })
       .catch(error => console.log(error));
   };
@@ -80,7 +80,7 @@ export default class RyanPTable extends React.Component<
     document.head.appendChild(styleLink);
   };
 
-  //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
+  //* INITIAL FETCHING OF DATA INTO COMPONENT STATE
   public componentDidMount() {
     this.checkLicenseActive();
     this.addSemanticUiCSS();

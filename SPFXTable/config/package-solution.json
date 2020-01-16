@@ -3,7 +3,7 @@
   "solution": {
     "name": "ryan-table-webpart-client-side-solution",
     "id": "6808f592-ddd6-46a3-8def-b17d40c3e7e5",
-    "version": "1.0.0.0",
+    "version": "2.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false
   },

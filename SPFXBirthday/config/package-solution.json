@@ -3,7 +3,7 @@
   "solution": {
     "name": "ryan-birthday-client-side-solution",
     "id": "b050615b-65f2-4494-aa47-9acf9593295a",
-    "version": "1.0.0.0",
+    "version": "2.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false
   },

@@ -26,7 +26,8 @@ export default class RootWebPart extends BaseClientSideWebPart<
       {
         description: this.properties.description,
         spHttpClient: this.context.spHttpClient,
-        currentSiteUrl: this.context.pageContext.web.absoluteUrl
+        currentSiteUrl: this.context.pageContext.web.absoluteUrl,
+        siteCollectionUrl: this.context.pageContext.site.absoluteUrl
       }
     );
 
@@ -46,7 +47,7 @@ export default class RootWebPart extends BaseClientSideWebPart<
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: strings.PropertyPaneDescription,
           },
           groups: [
             {
