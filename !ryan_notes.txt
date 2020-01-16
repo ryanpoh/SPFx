@@ -142,11 +142,11 @@ QuickLinks /
 Remove header from card. Add license and css /
 
 RyanHeader /
-RyanBirthday 
-RyanPTable
+RyanBirthday /
+RyanPTable/
 RyanTable
-RyanTabWindows
-Ryan Card
+RyanTabWindows /
+Ryan Card /
 
 
 
