@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "ryan-quicklinks-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/ryanQuicklinks/RyanQuicklinksWebPart.js",
+          "manifest": "./src/webparts/ryanQuicklinks/RyanQuicklinksWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "RyanQuicklinksWebPartStrings": "lib/webparts/ryanQuicklinks/loc/{locale}.js"
+  }
+}

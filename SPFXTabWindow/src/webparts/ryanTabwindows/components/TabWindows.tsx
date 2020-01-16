@@ -18,7 +18,11 @@ const getItems = arrObj => {
           <span className="cinema">{obj.meta}</span>
         </Item.Meta>
         <Item.Description>
-          <p>{obj.paragraph ? obj.paragraph.slice(0, 200) + "..." : paragraphPlaceholder}</p>
+          <p>
+            {obj.paragraph
+              ? obj.paragraph.slice(0, 200) + "..."
+              : paragraphPlaceholder}
+          </p>
         </Item.Description>
         <Item.Extra>
           <ArticleModal obj={obj} />
@@ -61,6 +65,12 @@ const generatePanes = arrObj => [
 const TabWindows = props => (
   <React.Fragment>
     <h2>Flash News</h2>
+    <a
+      style={{ float: "right" }}
+      href={`${props.siteCollectionUrl}/Lists/TabwindowsList/AllItems.aspx`}
+    >
+      View All
+    </a>
     <Tab panes={generatePanes(props.data)} />
   </React.Fragment>
 );

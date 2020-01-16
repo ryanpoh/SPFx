@@ -101,7 +101,10 @@ export default class RyanPTable extends React.Component<
     return (
       <React.Fragment>
         {this.state.isLicenseActive === "true" ? (
-          <TabWindows data={this.state.spListData} />
+          <TabWindows
+            siteCollectionUrl={this.props.siteCollectionUrl}
+            data={this.state.spListData}
+          />
         ) : (
           <Message negative>
             <Message.Header>

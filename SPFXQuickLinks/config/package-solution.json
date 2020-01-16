@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "ryan-tabwindows-client-side-solution",
-    "id": "6e3c952f-c50b-4e4a-9b17-0d94a84a8529",
-    "version": "4.0.0.0",
+    "name": "ryan-quicklinks-client-side-solution",
+    "id": "6db94c26-8a80-46a2-bab7-00a9b563e195",
+    "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false
   },
   "paths": {
-    "zippedPackage": "solution/ryan-tabwindows.sppkg"
+    "zippedPackage": "solution/ryan-quicklinks.sppkg"
   }
 }
