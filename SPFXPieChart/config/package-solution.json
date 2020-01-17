@@ -3,7 +3,7 @@
   "solution": {
     "name": "ryan-piechart-client-side-solution",
     "id": "f78f08d1-7df5-47ef-8182-c4f447a1c1fc",
-    "version": "1.0.0.0",
+    "version": "2.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false
   },

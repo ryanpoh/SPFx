@@ -64,7 +64,6 @@ const generatePanes = arrObj => [
 //? Images must be square for consistency.
 const TabWindows = props => (
   <React.Fragment>
-    <h2>Flash News</h2>
     <a
       style={{ float: "right" }}
       href={`${props.siteCollectionUrl}/Lists/TabwindowsList/AllItems.aspx`}
