@@ -2,9 +2,12 @@ import * as React from "react";
 import { IRyanLinechartProps } from "./IRyanLinechartProps";
 import { IRyanLinechartState } from "./IRyanLinechartState";
 import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
-
 import { ISchema } from "../ISchema";
 import LineChart from "./LineChart";
+import axios from "../axios-license";
+import { Message } from "semantic-ui-react";
+
+require("../../../../node_modules/semantic-ui-css/semantic.min.css");
 
 export default class RyanLinechart extends React.Component<
   IRyanLinechartProps,
@@ -12,7 +15,10 @@ export default class RyanLinechart extends React.Component<
 > {
   constructor(props: IRyanLinechartProps) {
     super(props);
-    this.state = { spListData: [] };
+    this.state = {
+      spListData: [],
+      isLicenseActive: "true"
+    };
   }
 
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
@@ -40,15 +46,40 @@ export default class RyanLinechart extends React.Component<
     });
   }
 
-  //? INITIAL FETCHING OF DATA INTO COMPONENT STATE
+  checkLicenseActive = () => {
+    const tenantUrl = this.props.siteCollectionUrl.split("/")[2];
+    axios
+      .get(`/tenants.json`)
+      .then(res => {
+        Object.keys(res.data).map(k => {
+          //* Object.keys returns an array of object keys
+          let obj = res.data[k];
+          if (obj.tenant === tenantUrl) {
+            this.setState({
+              isLicenseActive: obj.isLicenseActive
+            });
+          }
+        }); //* Extract object to put in array of object
+      })
+      .catch(error => console.log(error));
+  };
+
+  addSemanticUiCSS = () => {
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href =
+      "https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
+  };
+
+  //* INITIAL FETCHING OF DATA INTO COMPONENT STATE
   public componentDidMount() {
+    this.checkLicenseActive();
+    this.addSemanticUiCSS();
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
-  }
-
-  //? DYNAMIC UPDATING OF DATA INTO COMPONENT STATE EVERY 5 SECONDS
-  public componentWillMount() {
+    setInterval(() => this.checkLicenseActive(), 7000);
     setInterval(
       () =>
         this.getDataFromSPListDb().then(listFromSPDb => {
@@ -60,9 +91,20 @@ export default class RyanLinechart extends React.Component<
 
   public render(): React.ReactElement<IRyanLinechartProps> {
     return (
-      <div>
-        <LineChart data={this.state.spListData} />
-      </div>
+      <React.Fragment>
+        {this.state.isLicenseActive === "true" ? (
+          <LineChart data={this.state.spListData} />
+        ) : (
+          <Message negative>
+            <Message.Header>
+              We're sorry your SRKK tenant account has been deactivated.
+            </Message.Header>
+            <p>
+              Your license has expired. Please contact us for more information.
+            </p>
+          </Message>
+        )}
+      </React.Fragment>
     );
   }
 }

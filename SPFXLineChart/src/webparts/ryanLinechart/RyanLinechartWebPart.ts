@@ -26,10 +26,10 @@ export default class RyanLinechartWebPart extends BaseClientSideWebPart<
       {
         description: this.properties.description,
         spHttpClient: this.context.spHttpClient,
-        currentSiteUrl: this.context.pageContext.web.absoluteUrl
+        currentSiteUrl: this.context.pageContext.web.absoluteUrl,
+        siteCollectionUrl: this.context.pageContext.site.absoluteUrl
       }
     );
-
     ReactDom.render(element, this.domElement);
   }
 
