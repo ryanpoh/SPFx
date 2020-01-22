@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "ryan-landing-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/ryanLanding/RyanLandingWebPart.js",
+          "manifest": "./src/webparts/ryanLanding/RyanLandingWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "RyanLandingWebPartStrings": "lib/webparts/ryanLanding/loc/{locale}.js"
+  }
+}

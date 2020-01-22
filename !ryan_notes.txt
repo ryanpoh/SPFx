@@ -1,3 +1,6 @@
+REMOVE GIT
+rm -rf .git
+
 #SETUP
     nvm install -g node@8.11.4 OR nvm use 8.11.4
     npm install -g gulp@3.9.1 yo@2.0.5 @microsoft/generator-sharepoint@1.5.1
@@ -121,12 +124,12 @@ Apply-PnPProvisioningTemplate -Path C:\pnpdemo.pnp
 
 1. Change package.json
 2 Npm install
-3. Gulp dev cert
-2. Change gulpfile
-3. Remove, scss
-4. Add http and current site to webpart file
-5. Add state, schema file, axios-license and main component
-6. Edit all codes.
+3. Gulp trust-dev-cert
+4. Change gulp-file
+5. Remove, scss
+6. Add http and current site to webpart file
+7. Add state, schema file, axios-license and main component
+8. Edit all codes.
 
 
 
