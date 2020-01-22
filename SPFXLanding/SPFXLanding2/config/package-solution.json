@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "ryan-landing-client-side-solution",
+    "id": "cacf1657-ea8a-47ef-8ce5-342367c806db",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/ryan-landing.sppkg"
+  }
+}
