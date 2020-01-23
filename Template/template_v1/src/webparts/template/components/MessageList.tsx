@@ -7,7 +7,7 @@ const MesssageList = props => {
       <Message.Header>I am a Message List</Message.Header>
       <Message.List>
         {props.data.map(obj => {
-          return <Message.Item>{obj.items}</Message.Item>;
+          return <Message.Item>{obj.item}</Message.Item>;
         })}
       </Message.List>
     </Message>

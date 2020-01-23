@@ -9,19 +9,19 @@ const LineChart = props => {
     ? Can use RGBA format for colors as well.
     ? e.g: => backgroundColor: 'rgba(255,99,132,0.2)'
     */
-    labels: props.data.map(a => a.title),
+    labels: ["Jan", "Feb", "Mac", "April", "May"],
     datasets: [
       {
         label: "Faulty (pcs.)",
         backgroundColor: "rgbA(47,60,126, 0.8)",
         borderColor: "rgbA(47,60,126, 0.8)",
-        data: props.data.map(a => a.faultData)
+        data: [10, 20, 30, 40, 50]
       },
       {
         label: "Quantity (pcs.)",
         backgroundColor: "rgb(255, 99, 132)",
         borderColor: "rgb(255, 99, 132)",
-        data: props.data.map(a => a.chartData)
+        data: [1, 2, 3, 4, 5]
       }
     ]
   };
