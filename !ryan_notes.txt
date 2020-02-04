@@ -13,7 +13,6 @@ npm install --save-dev @microsoft/sp-module-loader
 REACT 16c(Node 10.15.3)
     ╰─ sudo  npm install -g gulp  yo  @microsoft/generator-sharepoint
 
-
 ╰─ npm list -g --depth 0                                                       ✔  223  13:15:07
 /usr/local/lib
 ├── @microsoft/generator-sharepoint@1.9.1

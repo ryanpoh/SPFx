@@ -58,7 +58,8 @@ export default class RyanPTable extends React.Component<
           let obj = res.data[k];
           if (obj.tenant === tenantUrl) {
             this.setState({
-              isLicenseActive: obj.isLicenseActive
+              isLicenseActive: res.data[obj.key].isLicenseActive //? This is pretty pointless, might as well use the bottom. It's more prepare for the future if using seperate database for key auth.
+              // isLicenseActive: obj.isLicenseActive
             });
           }
         }); //? Extract object to put in array of object
@@ -81,6 +82,7 @@ export default class RyanPTable extends React.Component<
     this.getDataFromSPListDb().then(listFromSPDb => {
       this.setState({ spListData: listFromSPDb });
     });
+
     setInterval(() => this.checkLicenseActive(), 7000);
     setInterval(
       () =>
@@ -115,7 +117,8 @@ export default class RyanPTable extends React.Component<
         ) : (
           <Message negative>
             <Message.Header>
-              We're sorry your SRKK tenant account has been deactivated.
+              We're sorry your SRKK tenant account has been deactivated. Test
+              with key.
             </Message.Header>
             <p>
               Your license has expired. Please contact us for more information.

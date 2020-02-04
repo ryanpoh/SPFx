@@ -24,7 +24,7 @@ export default class RyanLinechart extends React.Component<
   //? METHOD: FETCHING DATA FROM SHAREPOINT LIST VIA REST API.
   private getDataFromSPListDb(): Promise<ISchema[]> {
     return new Promise<ISchema[]>((resolve, reject) => {
-      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('LinechartList')/items?$select=Id,Title,chartData,faultData`;
+      const endpoint: string = `${this.props.currentSiteUrl}/_api/lists/getbytitle('LineChartList')/items?$select=Id,Title,chartData,faultData`;
       this.props.spHttpClient
         .get(endpoint, SPHttpClient.configurations.v1)
         .then((response: SPHttpClientResponse) => {
