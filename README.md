@@ -5,11 +5,15 @@
 <br></br>
 `cd SPFXHeader`
 
-2. Serve app using Terminal.
+2. Install dependancies.
+<br></br>
+`npm install`
+
+3. Serve app using Terminal.
 <br></br>
 `gulp serve --nobrowser`
 
-3. Then use your internet browser to visit your respective online workbench.
+4. Then use your internet browser to visit your respective online workbench.
 <br></br>
 `https://<TENANT NAME>.sharepoint.com/sites/<SITEPAGE>/_layouts/15/workbench.aspx`
 
@@ -54,4 +58,14 @@ export default instance;
       .catch(error => console.log(error));
   };
 ```
+
+### Deployment
+1. Run commands in Terminal
+```
+gulp clean
+gulp bundle --ship
+gulp package-solution --ship
+```
+
+2. The `.sppkg` file will appear in your `/sharepoint/solution/xxx.sppkg` directory 
 
