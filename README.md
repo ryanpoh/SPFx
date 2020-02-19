@@ -1,7 +1,7 @@
 # SPFx
 ### Quickstart
 
-1. Go to a SPFX webpart directory. In this case I'm using SPFXHeader. 
+1. Go to any SPFX webpart directory. For this example, I'll be using `SPFXHeader`. 
 <br></br>
 `cd SPFXHeader`
 
@@ -9,7 +9,7 @@
 <br></br>
 `gulp serve --nobrowser`
 
-3. Then use your browser to visit your respective online workbench.
+3. Then use your internet browser to visit your respective online workbench.
 <br></br>
 `https://<TENANT NAME>.sharepoint.com/sites/<SITEPAGE>/_layouts/15/workbench.aspx`
 
